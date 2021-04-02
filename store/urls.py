@@ -1,4 +1,4 @@
-from django import path
+from django.urls import path
 from .views import home, register, login, dashboard, \
     dealers, medicines, employees, customers, purchases
 
