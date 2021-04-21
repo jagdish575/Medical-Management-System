@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Dealer, Medicine, Employee, Customer, Purchase
+from .models import Dealer, Medicine, Employee, \
+    Customer, Purchase
+
 
 class DealerAdmin(admin.ModelAdmin):
     list_display = [

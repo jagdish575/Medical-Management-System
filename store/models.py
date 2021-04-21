@@ -8,6 +8,9 @@ class Dealer(models.Model):
     phone_number = models.CharField(max_length=15)
     email = models.CharField(max_length=20)
 
+    def __str__(self):
+        return "{self.fname} {self.lname}"
+
 
 class Medicine(models.Model):
     med_code = models.IntegerField()
@@ -16,6 +19,9 @@ class Medicine(models.Model):
     price = models.FloatField()
     stock = models.IntegerField()
     description = models.TextField()
+
+    def __str__(self):
+        return "{self.med_code}: {self.med_name}"
 
 
 class Employee(models.Model):
@@ -27,6 +33,9 @@ class Employee(models.Model):
     phone_number = models.CharField(max_length=15)
     email = models.CharField(max_length=20)
 
+    def __str__(self):
+        return "{self.emp_id}: {self.fname} {self.lname}"
+
 
 class Customer(models.Model):
     fname = models.CharField(max_length=100)
@@ -35,9 +44,25 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=15)
     email = models.CharField(max_length=20)
 
+    def __str__(self):
+        return "{self.fname} {self.lname}"
+
 
 class Purchase(models.Model):
     med_name = models.ForeignKey(Medicine, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     price_number = models.FloatField()
     quantity = models.IntegerField()
+
+    def __str__(self):
+        return "{self.med_name} {self.customer}"
+
+
+
+"""
+NOTE:
+- str method
+- get_absolute_url method
+- get_update_url method
+- get_delete_url method
+"""
