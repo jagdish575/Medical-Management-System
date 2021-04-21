@@ -20,8 +20,7 @@
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                    <input type="text" class="form-control user_input" id="validationCustomUsername"
-                                        aria-describedby="inputGroupPrepend" required="">
+                                    {{ form.username }}
                                     <div class="invalid-feedback">
                                         Please choose a username.
                                     </div>
@@ -36,7 +35,7 @@
                                     <span class="input-group-text" id="inputGroupPrepend">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
-                                    <input type="password" class="form-control password_input" id="validationCustom03" required="">
+                                    {{ form.password }}
                                     <div class="invalid-feedback">
                                         Your password must be minimum of 8 characters.
                                     </div>

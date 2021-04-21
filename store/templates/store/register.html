@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block content %}
+    <style>
+    p.text-bold{
+        font-weight: 550;
+    }
+    </style>
     <section class="login__section">
         {% include "store/_header.html" %}
 
@@ -12,7 +17,8 @@
                         Register
                     </p>
                     <div class="register_form">
-                        <form class="row g-3 needs-validation register_form">
+                        <form class="row g-3 needs-validation register_form" method="POST">
+                        {% csrf_token %}
 
                             <div class="col-md-12">
                                 <label for="validationCustomUsername" class="form-label">
@@ -20,8 +26,7 @@
                                 </label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                    <input type="text" class="form-control user_input" id="validationCustomUsername"
-                                        aria-describedby="inputGroupPrepend" required="">
+                                    {{ form.username }}
                                     <div class="invalid-feedback">
                                         Please choose a username.
                                     </div>
@@ -36,8 +41,7 @@
                                     <span class="input-group-text" id="inputGroupPrepend">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
-                                    <input type="password" class="form-control password_input" id="validationCustom03"
-                                        required="">
+                                    {{ form.password1 }}
                                     <div class="invalid-feedback">
                                         Your password must be minimum of 8 characters.
                                     </div>
@@ -52,7 +56,7 @@
                                     <span class="input-group-text" id="inputGroupPrepend">
                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                     </span>
-                                    <input type="password" class="form-control password_input" id="validationCustom04" required="">
+                                    {{ form.password2 }}
                                     <div class="invalid-feedback">
                                         Your password must be minimum of 8 characters.
                                     </div>
@@ -60,6 +64,11 @@
                             </div>
 
                             <div class="col-12">
+                                <div class="forgotten_password">
+                                     <p class="text-white" style="margin-top: 0% !important; padding-top: 0% !important;">
+                                    Already have an account? <a class="text-bold" href="{% url 'store:login' %}">Login</a>    
+                                </p>
+                                </div>
                                 <div class="col-12 pb-3">
                                     <button class="btn btn-block login-button" type="submit">Register</button>
                                 </div>

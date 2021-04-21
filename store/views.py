@@ -1,16 +1,32 @@
 from django.shortcuts import render, redirect
-
+from .forms import CreateUserForm, LogUserForm
 
 def home(request):
     return render(request, "store/home.html")
 
 
 def register(request):
-    return render(request, "store/register.html")
+    form = CreateUserForm()
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect("store:login")
+        return redirect("store:register")
+
+    context = {
+        "form": form
+    }
+    return render(request, "store/register.html", context)
 
 
 def login(request):
-    return render(request, "store/login.html")
+    form = LogUserForm()
+
+    context = {
+        "form": form
+    }
+    return render(request, "store/login.html", context)
 
 
 def dashboard(request):
