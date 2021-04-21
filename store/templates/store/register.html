@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'store/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/6e47be172b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/css/mdb.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <title>Register _ Medical Store</title>
-</head>
-
-<body>
-
+{% block content %}
     <section class="login__section">
         <header class="home__header">
             <nav class="navbar-expand-sm top__nav">
@@ -157,6 +145,4 @@
 
         <script src="assets/js/mdb.min.js"></script>
         <script src=""></script>
-</body>
-
-</html>
+{% endblock content %}
