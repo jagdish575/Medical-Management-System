@@ -2,15 +2,15 @@ from django.shortcuts import render, redirect
 
 
 def home(request):
-    pass
+    return render(request, "store/home.html")
 
 
 def register(request):
-    pass
+    return render(request, "store/register.html")
 
 
 def login(request):
-    pass
+    return render(request, "store/login.html")
 
 
 def dashboard(request):
@@ -35,3 +35,7 @@ def customers(request):
 
 def purchases(request):
     pass
+
+
+def confirm_logout(request):
+    return render(request, "store/confirm-logout.html")
