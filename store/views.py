@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
-    AddMedicineForm, AddEmployeeForm, AddCustomerForm
+    AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -247,6 +247,11 @@ def purchases_page(request):
 
 @login_required
 def add_purchase_page(request):
+    form = AddPurchaseForm()
+
+    context = {
+        "form": form
+    }
     return render(request, "store/add-purchase.html", context)
 
 

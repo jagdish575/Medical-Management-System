@@ -24,56 +24,47 @@ MedicalStore :: Add Purchase
                             {% csrf_token %}
 
                                 <div class="col-md-6">
-                                    <label for="validationCustomFirstName" class="form-label">
-                                        First Name:
+                                    <label for="validationCustomMedName" class="form-label">
+                                        Med Name:
                                     </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                        {{ form.fname }}
+                                        {{ form.med_name }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="validationCustomLastName" class="form-label">
-                                        Last Name:
+                                    <label for="validationCustomCustomerName" class="form-label">
+                                        Customer:
                                     </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                        {{ form.lname }}
+                                        {{ form.customer }}
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="validationPhoneNumber" class="form-label">
-                                        Phone Number:
+                                    <label for="validationPriceNumber" class="form-label">
+                                        Price Number:
                                     </label>
 
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">
-                                            <i class="fa fa-mobile" aria-hidden="true"></i>
+                                            <i class="fa fa-money" aria-hidden="true"></i>
                                         </span>
-                                        {{ form.phone_number }}
+                                        {{ form.price_number }}
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="validationEmail" class="form-label">
-                                        Email:
+                                    <label for="validationQuantity" class="form-label">
+                                        Quantity:
                                     </label>
 
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">
-                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                            <i class="fa fa-balance-scale" aria-hidden="true"></i>
                                         </span>
-                                        {{ form.email }}
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="validationAddress" class="form-label">
-                                            Address:
-                                        </label>
-                                        {{ form.address }}
+                                        {{ form.quantity }}
                                     </div>
                                 </div>
 
