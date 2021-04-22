@@ -68,12 +68,12 @@ function togglePurchaseItems(e) {
 }
 
 function toggleSideBar(e) {
+    mainNavBar.classList.toggle("margin__left");
     sideNavBar.classList.toggle("sidenav-d-none");
     // dealerCard.classList.toggle("d-none");
     // medicineCard.classList.toggle("d-none");
     // employeeCard.classList.toggle("d-none");
     // customerCard.classList.toggle("d-none");
     // purchaseCard.classList.toggle("d-none");
-    confirmCard.classList.toggle("d-none");
-    mainNavBar.classList.toggle("margin__left");
+    // confirmCard.classList.toggle("d-none");
 }
