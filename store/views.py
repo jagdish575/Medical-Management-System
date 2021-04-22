@@ -77,6 +77,11 @@ def dealers_page(request):
 
 
 @login_required
+def add_dealer_page(request):
+    return render(request, "store/add-dealer.html")
+
+
+@login_required
 def medicines_page(request):
     pass
 
