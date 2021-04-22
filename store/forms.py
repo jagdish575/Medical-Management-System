@@ -1,31 +1,57 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import (
+    Dealer, Medicine, Employee,
+    Customer, Purchase,
+)
 from django.contrib.auth.forms import UserCreationForm,\
     AuthenticationForm
 
 
-# class NoteCreateForm(forms.ModelForm):
-#     """"
-#     This class creates a note.
-#     """
-#     class Meta:
-#         model = Note
-#         fields = ['title', 'thought']
-#         widgets = {
-#             'title': forms.TextInput(attrs={
-#                 'class': 'form-control user_input',
-#                 'id': 'validationCustomUsername',
-#                 'aria-describedby': 'inputGroupPrepend',
-#                 'required': "true",
-#                 }
-#             ),
-#             'thought': forms.Textarea(attrs={
-#                 'class': 'form-control edit_textarea',
-#                 'id': 'editThought',
-#                 'rows': '3',
-#                 }
-#             )
-#         }
+class AddDealerForm(forms.ModelForm):
+    """"
+    This class creates a note.
+    """
+    class Meta:
+        model = Dealer
+        fields = ['fname', 'lname', 'address', 'phone_number', 'email']
+        widgets = {
+            'fname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationCustomFirstName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'lname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationCustomLastName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': '3',
+                }
+            ),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPhoneNumber',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "tel"
+                }
+            ),
+            'email': forms.TextInput(attrs={
+                'class': 'form-control user_input',
+                'id': 'validationEmail',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "email"
+                }
+            ),
+        }
 
 class CreateUserForm(UserCreationForm):
     """
