@@ -9,7 +9,7 @@ class Dealer(models.Model):
     email = models.CharField(max_length=50)
 
     def __str__(self):
-        return "{self.fname} {self.lname}"
+        return f"{self.fname} {self.lname}" 
 
 
 class Medicine(models.Model):
@@ -21,7 +21,7 @@ class Medicine(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return "{self.med_code}: {self.med_name}"
+        return f"{self.med_code}: {self.med_name}"
 
 
 class Employee(models.Model):
@@ -34,7 +34,7 @@ class Employee(models.Model):
     email = models.CharField(max_length=20)
 
     def __str__(self):
-        return "{self.emp_id}: {self.fname} {self.lname}"
+        return f"{self.emp_id}: {self.fname} {self.lname}"
 
 
 class Customer(models.Model):
@@ -45,7 +45,7 @@ class Customer(models.Model):
     email = models.CharField(max_length=20)
 
     def __str__(self):
-        return "{self.fname} {self.lname}"
+        return f"{self.fname} {self.lname}"
 
 
 class Purchase(models.Model):
@@ -55,13 +55,12 @@ class Purchase(models.Model):
     quantity = models.IntegerField()
 
     def __str__(self):
-        return "{self.med_name} {self.customer}"
+        return f"{self.med_name} {self.customer}"
 
 
 
 """
 NOTE:
-- str method
 - get_absolute_url method
 - get_update_url method
 - get_delete_url method
