@@ -209,6 +209,47 @@ class AddCustomerForm(forms.ModelForm):
             ),
         }
 
+
+class AddPurchaseForm(forms.ModelForm):
+
+    class Meta:
+        model = Purchase
+        fields = [
+            "med_name", "customer", "price_number", "quantity"
+        ]
+        widgets = {
+            'med_name': forms.Select(attrs={
+                'class': 'form-control',
+                'id': 'validationMedName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'customer': forms.Select(attrs={
+                'class': 'form-control',
+                'id': 'validationCustomer',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'price_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPrice',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'quantity': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+        }
+
 class CreateUserForm(UserCreationForm):
     """
     A form that inherits from the base *UserCreationForm*,

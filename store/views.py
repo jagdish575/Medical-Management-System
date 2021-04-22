@@ -239,7 +239,15 @@ def add_customer_page(request):
 
 @login_required
 def purchases_page(request):
-    pass
+    context = {
+
+    }
+    return render(request, "store/view-purchases.html", context)
+
+
+@login_required
+def add_purchase_page(request):
+    return render(request, "store/add-purchase.html", context)
 
 
 @login_required
