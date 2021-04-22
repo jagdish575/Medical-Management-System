@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
-    AddMedicineForm, AddEmployeeForm
+    AddMedicineForm, AddEmployeeForm, AddCustomerForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -200,7 +200,41 @@ def add_employee_page(request):
 
 @login_required
 def customers_page(request):
-    pass
+    customers = Customer.objects.all()
+
+    context = {
+        "customers": customers
+    }
+    return render(request, "store/view-customers.html", context)
+
+
+@login_required
+def add_customer_page(request):
+    form = AddCustomerForm()
+
+    if request.method == "POST":
+        form = AddCustomerForm(request.POST)
+
+        if form.is_valid():
+            fname = form.cleaned_data.get("fname")
+            lname = form.cleaned_data.get("lname")
+            address = form.cleaned_data.get("address")
+            phone_number = form.cleaned_data.get("phone_number")
+            email = form.cleaned_data.get("email")
+
+            customer = Customer(
+                fname=fname, lname=lname, address=address,
+                phone_number=phone_number, email=email
+            )
+            customer.save()
+            messages.success(request, "You have added a new employee.")
+            return redirect("store:view-customers")
+        return redirect("store:add-customer")
+
+    context = {
+        "form": form
+    }
+    return render(request, "store/add-customer.html", context)
 
 
 @login_required
