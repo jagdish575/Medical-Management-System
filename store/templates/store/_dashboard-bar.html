@@ -78,7 +78,7 @@
                         </div>
                     </li>
                     <li class="sidebar_item">
-                        <a href="" class="item_link" id="customerID">
+                        <a class="item_link" id="customerID">
                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                             <span class="item_text">
                                 Customers
@@ -86,10 +86,10 @@
                         </a>
 
                         <div class="customer__items" id="customerItems">
-                            <a href="" class="dealer__item">
+                            <a href="{% url 'store:add-customer' %}" class="dealer__item">
                                 > Add Customer
                             </a>
-                            <a href="" class="dealer__item">
+                            <a href="{% url 'store:view-customers' %}" class="dealer__item">
                                 > View Customers
                             </a>
                         </div>
@@ -125,7 +125,7 @@
                         </a>
                     </li>
                     <li class="sidebar_item">
-                        <a href="" class="item_link">
+                        <a href="{% url 'store:confirm-logout' %}" class="item_link">
                             <i class="fa fa-power-off" aria-hidden="true"></i>
                             <span class="item_text">
                                 Logout
@@ -154,14 +154,14 @@
                     </span>
                 </a>
 
-                <div class="navbar-nav">
+                {% comment %} <div class="navbar-nav">
                     <div class="navbar_flex">
-                        <a href="" class="nav-link logout">
+                        <a href="{% url 'store:confirm-logout' %}" class="nav-link logout">
                             <i class="fa fa-power-off" aria-hidden="true"></i>
                             Logout
                         </a>
                     </div>
-                </div>
+                </div> {% endcomment %}
             </div>
         </nav>
     </div>
