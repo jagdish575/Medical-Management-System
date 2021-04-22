@@ -20,7 +20,8 @@ MedicalStore :: Add Dealer
 
                     <div class="add__dealer__form">
                         <div class="container">
-                            <form class="row g-3 needs-validation" method="POST">
+                            <form method="POST" class="row g-3">
+                            {% csrf_token %}
                             
                                 <div class="col-md-6">
                                     <label for="validationCustomFirstName" class="form-label">
@@ -28,8 +29,7 @@ MedicalStore :: Add Dealer
                                     </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                        <input type="text" class="form-control" id="validationCustomFirstName"
-                                            aria-describedby="inputGroupPrepend" required="">
+                                        {{ form.fname }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -38,8 +38,7 @@ MedicalStore :: Add Dealer
                                     </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                        <input type="text" class="form-control" id="validationCustomLastName"
-                                            aria-describedby="inputGroupPrepend" required="">
+                                        {{ form.lname }}
                                     </div>
                                 </div>
 
@@ -52,8 +51,7 @@ MedicalStore :: Add Dealer
                                         <span class="input-group-text" id="inputGroupPrepend">
                                             <i class="fa fa-mobile" aria-hidden="true"></i>
                                         </span>
-                                        <input type="tel" class="form-control" id="validationPhoneNumber" aria-describedby="inputGroupPrepend"
-                                            required="">
+                                        {{ form.phone_number }}
                                     </div>
                                 </div>
 
@@ -66,7 +64,7 @@ MedicalStore :: Add Dealer
                                         <span class="input-group-text" id="inputGroupPrepend">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
                                         </span>
-                                        <input type="email" class="form-control" id="validationEmail" aria-describedby="inputGroupPrepend" required="">
+                                        {{ form.email }}
                                     </div>
                                 </div>
                             
@@ -75,7 +73,7 @@ MedicalStore :: Add Dealer
                                      <label for="validationAddress" class="form-label">
                                         Address:
                                      </label>
-                                     <textarea class="form-control" name="text" id="" required="" rows="3"></textarea>
+                                     {{ form.address }}
                                    </div>
                                 </div>
                             
