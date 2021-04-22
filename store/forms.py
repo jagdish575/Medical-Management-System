@@ -163,6 +163,51 @@ class AddEmployeeForm(forms.ModelForm):
         }
 
 
+class AddCustomerForm(forms.ModelForm):
+
+    class Meta:
+        model = Customer
+        fields = [
+            "fname", "lname", "address", "phone_number", "email"
+        ]
+        widgets = {
+            'fname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationFirstName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'lname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationLastName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': '3',
+                }
+            ),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "tel"
+                }
+            ),
+            'email': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationEmail',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': 'email'
+                }
+            ),
+        }
+
 class CreateUserForm(UserCreationForm):
     """
     A form that inherits from the base *UserCreationForm*,
