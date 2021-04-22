@@ -239,8 +239,10 @@ def add_customer_page(request):
 
 @login_required
 def purchases_page(request):
-    context = {
+    purchases = Purchase.objects.all()
 
+    context = {
+        "purchases": purchases
     }
     return render(request, "store/view-purchases.html", context)
 
@@ -248,6 +250,24 @@ def purchases_page(request):
 @login_required
 def add_purchase_page(request):
     form = AddPurchaseForm()
+
+    if request.method == "POST":
+        form = AddPurchaseForm(request.POST)
+
+        if form.is_valid():
+            med_name = form.cleaned_data.get("med_name")
+            customer = form.cleaned_data.get("customer")
+            price_number = form.cleaned_data.get("price_number")
+            quantity = form.cleaned_data.get("quantity")
+
+            purchase = Purchase(
+                med_name=med_name, customer=customer,
+                price_number=price_number, quantity=quantity
+            )
+            purchase.save()
+            messages.success(request, "You have a new purchase.")
+            return redirect("store:view-purchases")
+        return redirect("store:add-purchase")
 
     context = {
         "form": form

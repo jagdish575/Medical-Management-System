@@ -1,0 +1,49 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+MedicalStore :: View Purchases
+{% endblock title %}
+
+{% block content %}
+<section id="dashboard_section" class="dashboard_section">
+
+        <!-- Dashboard Sidebar -->
+        {% include "store/_dashboard-bar.html" %}
+
+        <div class="container-fluid">
+            <div class="add_dealer">
+                <div class="purchase__card card">
+                    <p class="h2">
+                        View Purchases
+                    </p>
+
+                    <div class="dealers__table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Med Name</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Price Number</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for purchase in purchases %}
+                                <tr>
+                                    <th scope="row">{{ purchase.id }}</th>
+                                    <td>{{ purchase.med_name }}</td>
+                                    <td>{{ purchase.customer }}</td>
+                                    <td>{{ purchase.price_number }}</td>
+                                    <td>{{ purchase.quantity }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
