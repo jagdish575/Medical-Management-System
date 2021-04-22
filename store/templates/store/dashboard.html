@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/icon.svg" type="image/x-icon">
-    <script src="https://kit.fontawesome.com/6e47be172b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/css/mdb.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <title>Dashboard - Medical Store</title>
-</head>
-<body>
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+MedicalStore :: Dashboard
+{% endblock title %}
+
+{% block content %}
   <section id="dashboard_section" class="dashboard_section">
         
     <!-- Dashboard Sidebar -->
@@ -20,7 +15,7 @@
 
                     <div class="dashboard_logo">
                         <div class="logo_flex">
-                            <img src="assets/images/logo.png" alt="" class="img-responsive">
+                            <img src="{% static 'images/logo.png' %}" alt="" class="img-responsive">
 
                             <span class="text">
                                 Medical Store
@@ -41,7 +36,7 @@
                                 </a>
                             </li>
                             <li class="sidebar_item">
-                                <a href="" class="item_link" id="dealerID">
+                                <a class="item_link" id="dealerID">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                     <span class="item_text">
                                         Dealers
@@ -49,10 +44,10 @@
                                 </a>
 
                                 <div class="dealer__items" id="dealerItems">
-                                    <a href="add-dealer.html" class="dealer__item">
+                                    <a href="{% url 'store:add-dealer' %}" class="dealer__item">
                                       >  Add Dealer
                                     </a>
-                                    <a href="view-dealers.html" class="dealer__item">
+                                    <a href="{% url 'store:view-dealers' %}" class="dealer__item">
                                       >  View Dealers
                                     </a>
                                 </div>
@@ -152,7 +147,7 @@
             </div>
 
             <!-- Dashboard Navbar -->
-            <div class="dashboard_navbar" id=mainNavBar>
+            <div class="dashboard_navbar" id="mainNavBar">
                 <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top">
                     <div class="container-fluid">
                         <div class="dashboard_sidebar_button">
@@ -162,7 +157,7 @@
                         </div>
 
                         <a class="navbar-brand nav_image" href="#">
-                            <img src="assets/images/medicine.png" alt="" class="img-responsive">
+                            <img src="{% static 'images/medicine.png' %}" alt="" class="img-responsive">
                             <span class="nav_span">
                                 Hi, Israel!
                             </span>
@@ -186,8 +181,4 @@
             </div>
         </div>
   </section>
-
-  <script src="assets/js/mdb.min.js"></script>
-  <script src="assets/js/main.js"></script>
-</body>
-</html>
+{% endblock content %}
