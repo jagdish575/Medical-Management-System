@@ -76,7 +76,12 @@ def dashboard_page(request):
 
 @login_required
 def dealers_page(request):
-    pass
+    dealers = Dealer.objects.all()
+
+    context = {
+        'dealers': dealers
+    }
+    return render(request, "store/view-dealers.html", context)
 
 
 @login_required
