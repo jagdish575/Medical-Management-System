@@ -6,6 +6,36 @@ MedicalStore :: Dashboard
 {% endblock title %}
 
 {% block content %}
+  <style>
+    div.dashboard{
+      margin-top: 80px;
+    }
+
+    div.dash_card{
+      border-radius: 20px;
+      margin-bottom: 50px;
+    }
+
+    div.dash_card:last-child{
+      margin-bottom: 100px;
+    }
+
+    div.head{
+      padding: 20px;
+    }
+
+    p.h3{
+      color: #000;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    div.head svg{
+      font-size: 28px;
+      color: #000;
+    }
+  </style>
+
   <section id="dashboard_section" class="dashboard_section">
         
         <!-- Dashboard Sidebar -->
@@ -13,6 +43,102 @@ MedicalStore :: Dashboard
 
         <div class="container-fluid">
             <div class="dashboard">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card dash_card">
+                    <div class="head d-flex">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
+
+                      <p class="pl-5 h3">
+                        Dealers
+                      </p>
+                    </div>
+                    <div class="footer card-footer d-flex justify-content-between bg-black">
+                      <a href="{% url "store:view-dealers" %}" class="nav-link pr-5">
+                        View
+
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card dash_card">
+                    <div class="head d-flex">
+                      <i class="fas fa-pills"></i>
+
+                      <p class="pl-5 h3">
+                        Medicines
+                      </p>
+                    </div>
+                    <div class="footer card-footer d-flex justify-content-between bg-black">
+                      <a href="{% url "store:view-medicines" %}" class="nav-link pr-5">
+                        View
+
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card dash_card">
+                    <div class="head d-flex">
+                      <i class="fa fa-briefcase" aria-hidden="true"></i>
+
+                      <p class="pl-5 h3">
+                        Employees
+                      </p>
+                    </div>
+                    <div class="footer card-footer d-flex justify-content-between bg-black">
+                      <a href="{% url "store:view-employees" %}" class="nav-link pr-5">
+                        View
+
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="card dash_card">
+                    <div class="head d-flex">
+                      <i class="fas fa-people-carry"></i>
+
+                      <p class="pl-5 h3">
+                        Customers
+                      </p>
+                    </div>
+                    <div class="footer card-footer d-flex justify-content-between bg-black">
+                      <a href="{% url "store:view-customers" %}" class="nav-link pr-5">
+                        View
+
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="card dash_card">
+                    <div class="head d-flex">
+                      <i class="fas fa-money-bill"></i>
+
+                      <p class="pl-5 h3">
+                        Purchases
+                      </p>
+                    </div>
+                    <div class="footer card-footer d-flex justify-content-between bg-black">
+                      <a href="{% url "store:view-purchases" %}" class="nav-link pr-5">
+                        View
+
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
   </section>
