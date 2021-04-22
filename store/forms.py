@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import (
     Dealer, Medicine, Employee,
-    Customer, Purchase,
+    Customer, Purchase, Profile
 )
 from django.contrib.auth.forms import UserCreationForm,\
     AuthenticationForm
@@ -316,40 +316,53 @@ class LogUserForm(forms.Form):
     )
 
 
-# class UpdateProfileForm(forms.ModelForm):
-#     """
-#     This form updates a user profile, from the given 
-#     bio and profile_picture fields.
-#     """
-#     profile_picture = forms.FileField()
-#     class Meta:
-#         model = Profile
-#         fields = ['bio', 'profile_picture']
-#         widgets = {
-#             'bio': forms.Textarea(attrs={
-#                 'class': 'form-control edit_textarea',
-#                 'id': 'editBio',
-#                 'rows': '3',
-#             }
-#         )
-#     }
+class UpdateProfileForm(forms.ModelForm):
+    """
+    This form updates a user profile, from the given 
+    bio and profile_picture fields.
+    """
+    profile_picture = forms.FileField()
+    class Meta:
+        model = Profile
+        fields = ['user', 'phone_number', 'profile_picture']
+        widgets = {
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "tel"
+                }
+            ),
+    }
 
 
 class UpdateUserForm(forms.ModelForm):
-    """
-    This form updates a user, from the given 
-    username field.
-    """
+
     class Meta:
         model = User
-        fields = ['username']
+        fields = [
+            "first_name", "last_name", "username", "email"
+        ]
         widgets = {
-            'username': forms.TextInput(attrs={
-            'autocomplete': 'username',
-            'class': 'form-control user_input',
-            'id': 'validationCustomUsername',
-            'aria-describedby': 'inputGroupPrepend',
-            'required': 'true',
-            }
-        )
+            'first_name': forms.TextInput(attrs={
+            'placeholder': 'First Name',
+            'class': 'form-control',
+            'id': 'inputFirstName3MD',
+        }),
+        'last_name': forms.TextInput(attrs={
+            'placeholder': 'Last Name',
+            'class': 'form-control',
+            'id': 'inputLastName3MD',
+        }),
+        'username': forms.TextInput(attrs={
+            'placeholder': 'Username',
+            'class': 'form-control',
+            'id': 'inputUserName3MD',
+        }),
+        'email': forms.TextInput(attrs={
+            'placeholder': 'Email',
+            'class': 'form-control',
+            'id': 'inputEName3MD',
+        }),
     }
