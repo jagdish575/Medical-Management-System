@@ -29,8 +29,7 @@ MedicalStore :: Add Employee
                                     </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                        <input type="text" class="form-control" id="validationCustomFirstName"
-                                            aria-describedby="inputGroupPrepend" required="">
+                                        {{ form.fname }}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -39,8 +38,7 @@ MedicalStore :: Add Employee
                                     </label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                        <input type="text" class="form-control" id="validationCustomLastName"
-                                            aria-describedby="inputGroupPrepend" required="">
+                                        {{ form.lname }}
                                     </div>
                                 </div>
 
@@ -53,12 +51,24 @@ MedicalStore :: Add Employee
                                         <span class="input-group-text" id="inputGroupPrepend">
                                             <i class="fa fa-mobile" aria-hidden="true"></i>
                                         </span>
-                                        <input type="tel" class="form-control" id="validationPhoneNumber"
-                                            aria-describedby="inputGroupPrepend" required="">
+                                        {{ form.phone_number }}
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
+                                    <label for="validationSalary" class="form-label">
+                                        Salary:
+                                    </label>
+
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="inputGroupPrepend">
+                                            <i class="fa fa-money" aria-hidden="true"></i>
+                                        </span>
+                                        {{ form.salary }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
                                     <label for="validationEmail" class="form-label">
                                         Email:
                                     </label>
@@ -67,8 +77,7 @@ MedicalStore :: Add Employee
                                         <span class="input-group-text" id="inputGroupPrepend">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
                                         </span>
-                                        <input type="email" class="form-control" id="validationEmail"
-                                            aria-describedby="inputGroupPrepend" required="">
+                                        {{ form.email }}
                                     </div>
                                 </div>
 
@@ -77,8 +86,7 @@ MedicalStore :: Add Employee
                                         <label for="validationAddress" class="form-label">
                                             Address:
                                         </label>
-                                        <textarea class="form-control" name="text" id="" required=""
-                                            rows="3"></textarea>
+                                        {{ form.address }}
                                     </div>
                                 </div>
 
