@@ -33,12 +33,12 @@ MedicalStore :: View Customers
                             <tbody>
                             {% for customer in customers %}
                                 <tr>
-                                    <th scope="row">{{ employee.id }}</th>
-                                    <td>{{ employee.fname }}</td>
-                                    <td>{{ employee.lname }}</td>
-                                    <td>{{ employee.phone_number }}</td>
-                                    <td>{{ employee.email }}</td>
-                                    <td>{{ employee.address }}</td>
+                                    <th scope="row">{{ customer.id }}</th>
+                                    <td>{{ customer.fname }}</td>
+                                    <td>{{ customer.lname }}</td>
+                                    <td>{{ customer.phone_number }}</td>
+                                    <td>{{ customer.email }}</td>
+                                    <td>{{ customer.address }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
