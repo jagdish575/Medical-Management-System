@@ -1,0 +1,53 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+MedicalStore :: View Medicines
+{% endblock title %}
+
+{% block content %}
+<section id="dashboard_section" class="dashboard_section">
+
+        <!-- Dashboard Sidebar -->
+        {% include "store/_dashboard-bar.html" %}
+
+        <div class="container-fluid">
+            <div class="add_dealer">
+                <div class="dealers__card card">
+                    <p class="h2">
+                        View Medicines
+                    </p>
+
+                    <div class="dealers__table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Med Code</th>
+                                    <th scope="col">Med Name</th>
+                                    <th scope="col">Dealer Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for medicine in medicines %}
+                                <tr>
+                                    <th scope="row">{{ medicine.id }}</th>
+                                    <td>{{ medicine.code }}</td>
+                                    <td>{{ medicine.name }}</td>
+                                    <td>{{ medicine.dealer_name }}</td>
+                                    <td>{{ medicine.price }}</td>
+                                    <td>{{ medicine.stock }}</td>
+                                    <td>{{ medicine.description }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
