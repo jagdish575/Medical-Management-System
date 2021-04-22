@@ -44,8 +44,8 @@
                         </div>
                     </li>
                     <li class="sidebar_item">
-                        <a href="" class="item_link" id="medicineID">
-                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        <a class="item_link" id="medicineID">
+                            <i class="fas fa-pills    "></i>
                             <span class="item_text">
                                 Medicines
                             </span>
@@ -61,18 +61,18 @@
                         </div>
                     </li>
                     <li class="sidebar_item">
-                        <a href="" class="item_link" id="employeeID">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <a class="item_link" id="employeeID">
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>
                             <span class="item_text">
                                 Employees
                             </span>
                         </a>
 
                         <div class="employee__items" id="employeeItems">
-                            <a href="" class="dealer__item">
+                            <a href="{% url 'store:add-employee' %}" class="dealer__item">
                                 > Add Employee
                             </a>
-                            <a href="" class="dealer__item">
+                            <a href="{% url 'store:view-employees' %}" class="dealer__item">
                                 > View Employees
                             </a>
                         </div>
