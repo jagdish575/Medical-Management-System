@@ -168,7 +168,8 @@ class AddCustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = [
-            "fname", "lname", "address", "phone_number", "email"
+            "fname", "lname", "address",
+            "phone_number", "email"
         ]
         widgets = {
             'fname': forms.TextInput(attrs={
