@@ -89,6 +89,7 @@ def add_dealer_page(request):
     form = AddDealerForm()
 
     if request.method == "POST":
+        form = AddDealerForm(request.POST)
         if form.is_valid():
             fname = form.cleaned_data.get("fname")
             lname = form.cleaned_data.get("lname")
