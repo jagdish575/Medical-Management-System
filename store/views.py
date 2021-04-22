@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, LogUserForm
+from .forms import CreateUserForm, LogUserForm, AddDealerForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from .models import (
+    Dealer, Medicine, Employee,
+    Customer, Purchase,
+)
 
 
 def home_page(request):
@@ -78,7 +81,30 @@ def dealers_page(request):
 
 @login_required
 def add_dealer_page(request):
-    return render(request, "store/add-dealer.html")
+    form = AddDealerForm()
+
+    if request.method == "POST":
+        if form.is_valid():
+            fname = form.cleaned_data.get("fname")
+            lname = form.cleaned_data.get("lname")
+            address = form.cleaned_data.get("address")
+            phone_number = form.cleaned_data.get("phone_number")
+            email = form.cleaned_data.get("email")
+            print(fname, lname)
+
+            dealer = Dealer(
+                fname=fname, lname=lname, address=address,
+                phone_number=phone_number, email=email
+            )
+            dealer.save()
+            messages.success(request, "You have added a new dealer.")
+            return redirect("store:view-dealers")
+        return redirect("store:add-dealer")
+
+    context = {
+        'form': form
+    }
+    return render(request, "store/add-dealer.html", context)
 
 
 @login_required
