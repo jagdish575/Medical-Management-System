@@ -2,7 +2,7 @@ from django.urls import path
 from .views import home_page, register_page, login_page, dashboard_page, \
     dealers_page, medicines_page, employees_page, customers_page, purchases_page,\
         confirm_logout_page, add_dealer_page, add_medicine_page, add_employee_page,\
-            logout, add_customer_page, add_purchase_page
+            logout, add_customer_page, add_purchase_page, settings_page
 
 app_name = 'store'
 
@@ -22,5 +22,6 @@ urlpatterns = [
     path('customers/', customers_page, name="view-customers"),
     path('customers/add-customer/', add_customer_page, name="add-customer"),
     path('purchases/', purchases_page, name="view-purchases"),
-    path('purchases/add-purchase/', add_purchase_page, name="add-purchase")
+    path('purchases/add-purchase/', add_purchase_page, name="add-purchase"),
+    path('settings/', settings_page, name="settings")
 ]

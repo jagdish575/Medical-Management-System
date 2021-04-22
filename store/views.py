@@ -280,6 +280,9 @@ def confirm_logout_page(request):
     return render(request, "store/confirm-logout.html")
 
 
+@login_required
+def settings_page(request):
+    return render(request, "store/settings.html")
 # @login_required
 # def profile_page(request):
 #     u_form = UpdateUserForm(instance=request.user)
