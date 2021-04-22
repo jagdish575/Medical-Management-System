@@ -87,12 +87,12 @@ def employees_page(request):
 
 
 @login_required
-def customers(request):
+def customers_page(request):
     pass
 
 
 @login_required
-def purchases(request):
+def purchases_page(request):
     pass
 
 

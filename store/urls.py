@@ -1,18 +1,19 @@
 from django.urls import path
-from .views import home, register, login, dashboard, \
-    dealers, medicines, employees, customers, purchases, confirm_logout
+from .views import home_page, register_page, login_page, dashboard_page, \
+    dealers_page, medicines_page, employees_page, customers_page, purchases_page,\
+        confirm_logout_page
 
 app_name = 'store'
 
 urlpatterns = [
-    path('', home, name="home"),
-    path('register/', register, name="register"),
-    path('login/', login, name="login"),
-    path('confirm-logout/', confirm_logout, name="confirm-logout"),
-    path('dashboard/', dashboard, name="dashboard"),
-    path('dealers/', dealers, name="dealers"),
-    path('medicines/', medicines, name="medicines"),
-    path('employees/', employees, name="employees"),
-    path('customers/', customers, name="customers"),
-    path('purchases/', purchases, name="purchases"),
+    path('', home_page, name="home"),
+    path('register/', register_page, name="register"),
+    path('login/', login_page, name="login"),
+    path('confirm-logout/', confirm_logout_page, name="confirm-logout"),
+    path('dashboard/', dashboard_page, name="dashboard"),
+    path('dealers/', dealers_page, name="dealers"),
+    path('medicines/', medicines_page, name="medicines"),
+    path('employees/', employees_page, name="employees"),
+    path('customers/', customers_page, name="customers"),
+    path('purchases/', purchases_page, name="purchases"),
 ]
