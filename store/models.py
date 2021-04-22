@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Dealer(models.Model):
@@ -57,6 +58,11 @@ class Purchase(models.Model):
     def __str__(self):
         return f"{self.med_name} {self.customer}"
 
+
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=20)
+    profile_picture = models.ImageField(upload_to="users/")
 
 
 """
