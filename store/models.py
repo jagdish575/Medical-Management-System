@@ -61,6 +61,7 @@ class Purchase(models.Model):
 
 """
 NOTE:
+
 - get_absolute_url method
 - get_update_url method
 - get_delete_url method
