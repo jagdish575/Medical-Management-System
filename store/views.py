@@ -155,14 +155,43 @@ def add_medicine_page(request):
 
 @login_required
 def employees_page(request):
-    return render(request, "store/view-employees.html")
+    employees = Employee.objects.all()
+
+    context = {
+        "employees": employees
+    }
+    return render(request, "store/view-employees.html", context)
 
 
 @login_required
 def add_employee_page(request):
     form = AddEmployeeForm()
 
-    
+    if request.method == "POST":
+        form = AddEmployeeForm(request.POST)
+        if form.is_valid():
+            """
+            imports random function to randomly create a unique emp_id
+            """
+            import random
+
+            emp_id = random.randrange(000, 999)
+            fname = form.cleaned_data.get("fname")
+            lname = form.cleaned_data.get("lname")
+            address = form.cleaned_data.get("address")
+            salary = form.cleaned_data.get("salary")
+            phone_number = form.cleaned_data.get("phone_number")
+            email = form.cleaned_data.get("email")
+
+            employee = Employee(
+                emp_id=emp_id, fname=fname, lname=lname, address=address,
+                salary=salary, phone_number=phone_number, email=email
+            )
+            employee.save()
+            messages.success(request, "You have added a new employee.")
+            return redirect("store:view-employees")
+        return redirect("store:add-employee")
+
     context = {
         "form": form
     }
