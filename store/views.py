@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-@login_required
+
 def home_page(request):
     return render(request, "store/home.html")
 
@@ -16,7 +16,6 @@ def logout_page(request):
     return redirect("store:login")
 
 
-@login_required
 def login_page(request):
     form = LogUserForm()
 
@@ -44,7 +43,7 @@ def login_page(request):
     return render(request, "store/login.html", context)
 
 
-@login_required
+
 def register_page(request):
     form = CreateUserForm()
 
@@ -54,6 +53,7 @@ def register_page(request):
             form.save()
             messages.success(request, "Your account has successfully been created.")
             return redirect("store:login")
+        print("Something's not right.")
         return redirect("store:register")
 
     context = {
