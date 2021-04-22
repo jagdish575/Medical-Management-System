@@ -108,6 +108,68 @@ class AddMedicineForm(forms.ModelForm):
         }
 
 
+class AddEmployeeForm(forms.ModelForm):
+
+    class Meta:
+        model = Employee
+        fields = [
+            "emp_id", "fname", "lname", "address",
+            "salary", "phone_number", "email"
+        ]
+        widgets = {
+            'emp_id': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationEmpCode',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'fname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationFirstName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'lname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationLastName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': '3',
+                }
+            ),
+            'salary': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPrice',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'email': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationEmail',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': 'email'
+                }
+            ),
+        }
+
+
 class CreateUserForm(UserCreationForm):
     """
     A form that inherits from the base *UserCreationForm*,
