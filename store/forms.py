@@ -77,7 +77,7 @@ class AddMedicineForm(forms.ModelForm):
                 'required': "true",
                 }
             ),
-            'med_name': forms.TextInput(attrs={
+            'dealer_name': forms.Select(attrs={
                 'class': 'form-control',
                 'id': 'validationMedName',
                 'aria-describedby': 'inputGroupPrepend',
