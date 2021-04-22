@@ -113,17 +113,10 @@ class AddEmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = [
-            "emp_id", "fname", "lname", "address",
+            "fname", "lname", "address",
             "salary", "phone_number", "email"
         ]
         widgets = {
-            'emp_id': forms.TextInput(attrs={
-                'class': 'form-control',
-                'id': 'validationEmpCode',
-                'aria-describedby': 'inputGroupPrepend',
-                'required': "true",
-                }
-            ),
             'fname': forms.TextInput(attrs={
                 'class': 'form-control',
                 'id': 'validationFirstName',
@@ -156,7 +149,7 @@ class AddEmployeeForm(forms.ModelForm):
                 'id': 'validationStock',
                 'aria-describedby': 'inputGroupPrepend',
                 'required': "true",
-                'type': "number"
+                'type': "tel"
                 }
             ),
             'email': forms.TextInput(attrs={
