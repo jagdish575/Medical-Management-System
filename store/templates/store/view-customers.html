@@ -1,0 +1,51 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+MedicalStore :: View Customers
+{% endblock title %}
+
+{% block content %}
+<section id="dashboard_section" class="dashboard_section">
+
+        <!-- Dashboard Sidebar -->
+        {% include "store/_dashboard-bar.html" %}
+
+        <div class="container-fluid">
+            <div class="add_dealer">
+                <div class="customer__card card">
+                    <p class="h2">
+                        View Customers
+                    </p>
+
+                    <div class="dealers__table table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for customer in customers %}
+                                <tr>
+                                    <th scope="row">{{ employee.id }}</th>
+                                    <td>{{ employee.fname }}</td>
+                                    <td>{{ employee.lname }}</td>
+                                    <td>{{ employee.phone_number }}</td>
+                                    <td>{{ employee.email }}</td>
+                                    <td>{{ employee.address }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
