@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, LogUserForm, AddDealerForm
+from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
+    AddMedicineForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -115,12 +116,54 @@ def add_dealer_page(request):
 
 @login_required
 def medicines_page(request):
-    pass
+    medicines = Medicine.objects.all()
+
+    context = {
+        "medicines": medicines
+    }
+    return render(request, "store/view-medicines.html", context)
+
+
+@login_required
+def add_medicine_page(request):
+    form = AddMedicineForm()
+
+    if request.method == "POST":
+        form = AddMedicineForm(request.POST)
+        if form.is_valid():
+            med_code = form.cleaned_data.get("med_code")
+            med_name = form.cleaned_data.get("med_name")
+            dealer_name = form.cleaned_data.get("dealer_name")
+            price = form.cleaned_data.get("price")
+            stock = form.cleaned_data.get("stock")
+            description = form.cleaned_data.get("description")
+
+            medicine = Medicine(
+                med_code=med_code, med_name=med_name, dealer_name=dealer_name,
+                price=price, stock=stock, description=description
+            )
+            medicine.save()
+            messages.success(request, "You have added a new medicine.")
+            return redirect("store:view-medicines")
+        return redirect("store:add-medicine")
+
+    context = {
+        "form": form
+    }
+    return render(request, "store/add-medicine.html", context)
 
 
 @login_required
 def employees_page(request):
-    pass
+    return render(request, "store/view-employees.html")
+
+
+@login_required
+def add_employee_page(request):
+    context = {
+        
+    }
+    return render(request, "store/add-employee.html", context)
 
 
 @login_required

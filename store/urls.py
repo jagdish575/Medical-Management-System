@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import home_page, register_page, login_page, dashboard_page, \
     dealers_page, medicines_page, employees_page, customers_page, purchases_page,\
-        confirm_logout_page, add_dealer_page
+        confirm_logout_page, add_dealer_page, add_medicine_page, add_employee_page
 
 app_name = 'store'
 
@@ -13,8 +13,10 @@ urlpatterns = [
     path('dashboard/', dashboard_page, name="dashboard"),
     path('dealers/', dealers_page, name="view-dealers"),
     path('dealers/add-dealer/', add_dealer_page, name="add-dealer"),
-    path('medicines/', medicines_page, name="medicines"),
-    path('employees/', employees_page, name="employees"),
+    path('medicines/', medicines_page, name="view-medicines"),
+    path('medicines/add-medicine/', add_medicine_page, name="add-medicine"),
+    path('employees/', employees_page, name="view-employees"),
+    path('employees/add-employee/', add_employee_page, name="add-employee"),
     path('customers/', customers_page, name="customers"),
     path('purchases/', purchases_page, name="purchases"),
 ]
