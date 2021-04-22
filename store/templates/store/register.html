@@ -2,11 +2,6 @@
 {% load static %}
 
 {% block content %}
-    <style>
-    p.text-bold{
-        font-weight: 550;
-    }
-    </style>
     <section class="login__section">
         {% include "store/_header.html" %}
 
@@ -16,8 +11,8 @@
                     <p class="h3">
                         Register
                     </p>
-                    <div class="register_form">
-                        <form class="row g-3 needs-validation register_form" method="POST">
+                    <div class="register_form mt-4">
+                        <form method="POST" class="row g-3 register_form">
                         {% csrf_token %}
 
                             <div class="col-md-12">
