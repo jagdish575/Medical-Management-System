@@ -26,6 +26,10 @@ div.settings_profile_head p.h5{
     margin-bottom: 30px;
 }
 
+div.settings_body{
+    padding-bottom: 50px;
+}
+
 div.profile_body_card{
     border-radius: 20px;
     background-color: #f7fafc;
@@ -74,6 +78,7 @@ div.settings_profile_body div.card{
     div.profile_form_body button.col-12{
         width: 100% !important;
         max-width: 100% !important;
+        color: #000 !important;
     }
 }
 
@@ -108,12 +113,13 @@ div.profile_update_button button:hover{
                     <div class="settings_profile_body">
                         <div class="profile_body_card card">
                             <div class="profile_form_body">
-                                <form class="row g-3 needs-validation animate__animated animate__bounceInRight" novalidate>
+                                <form class="row g-3 animate__animated animate__bounceInRight" method="POST">
+                                    {% csrf_token %}
                                     
                                     <!-- First Name -->
                                     <div class="col-md-6">
                                       <label for="validationCustom01" class="form-label">First Name</label>
-                                      <input type="text" class="form-control firstname_input" value="Israel" id="validationCustom01" required>
+                                      {{ u_form.first_name }}
                                       <div class="valid-feedback">
                                         Looks good!
                                       </div>
@@ -122,7 +128,7 @@ div.profile_update_button button:hover{
                                     <!-- Last Name -->
                                     <div class="col-md-6">
                                       <label for="validationCustom02" class="form-label">Last Name</label>
-                                      <input type="text" class="form-control lastname_input" value="Abraham" id="validationCustom02" required>
+                                      {{ u_form.last_name }}
                                       <div class="valid-feedback">
                                         Looks good!
                                       </div>
@@ -131,7 +137,7 @@ div.profile_update_button button:hover{
                                      <!-- User Name -->
                                      <div class="col-md-6">
                                         <label for="validationCustom01" class="form-label">User Name</label>
-                                        <input type="text" class="form-control firstname_input" value="Abram" id="validationCustom07" required>
+                                        {{ u_form.username }}
                                         <div class="valid-feedback">
                                           Looks good!
                                         </div>
@@ -140,7 +146,7 @@ div.profile_update_button button:hover{
                                     <!-- Email -->
                                     <div class="col-md-6">
                                       <label for="validationCustom02" class="form-label">Email</label>
-                                      <input type="email" class="form-control email_input" value="israel@gmail.com" id="validationCustom02" required>
+                                      {{ u_form.email }}
                                       <div class="valid-feedback">
                                         Looks good!
                                       </div>
@@ -149,11 +155,20 @@ div.profile_update_button button:hover{
                                     <!-- Phone Number -->
                                     <div class="col-md-12">
                                       <label for="validationCustom02" class="form-label">Phone Number</label>
-                                      <input type="text" class="form-control phonenumber_input" value="08137281916" id="validationCustom02" required>
+                                      {{ p_form.phone_number }}
                                       <div class="valid-feedback">
                                         Looks good!
                                       </div>
                                     </div>
+
+                                    <!-- Profile Picture -->
+                                    <div class="col-md-12">
+                                        <label for="validationCustom07" class="form-label">Profile Picture</label>
+                                        <br>{{ p_form.profile_picture }}
+                                        <div class="valid-feedback">
+                                          Looks good!
+                                        </div>
+                                      </div>
                                     
                                     <!-- Profile Update Button -->
                                     <div class="col-12 profile_update_button">
