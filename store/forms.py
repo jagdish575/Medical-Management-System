@@ -54,6 +54,52 @@ class AddDealerForm(forms.ModelForm):
         }
 
 
+class UpdateDealerForm(forms.ModelForm):
+    """"
+    This class updates a dealer.
+    """
+    class Meta:
+        model = Dealer
+        fields = ['fname', 'lname', 'address', 'phone_number', 'email']
+        widgets = {
+            'fname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationCustomFirstName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'lname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationCustomLastName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': '3',
+                }
+            ),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPhoneNumber',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "tel"
+                }
+            ),
+            'email': forms.TextInput(attrs={
+                'class': 'form-control user_input',
+                'id': 'validationEmail',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "email"
+                }
+            ),
+        }
+
+
 class AddMedicineForm(forms.ModelForm):
     
     class Meta:
@@ -289,7 +335,7 @@ class CreateUserForm(UserCreationForm):
     }
 
 
-class LogUserForm(forms.Form):
+class LogUserForm(AuthenticationForm):
     """
     A form that inherits from the base *Form* class,
     and logs a user, with no privileges, from the given 
