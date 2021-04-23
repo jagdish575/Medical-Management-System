@@ -6,6 +6,11 @@ MedicalStore :: Login
 {% endblock title %}
 
 {% block content %}
+    <style>
+        section.login__body{
+            padding-bottom: 100px !important;
+        }
+    </style>
     <section class="login__section">
         {% include "store/_header.html" %}
 
@@ -16,8 +21,14 @@ MedicalStore :: Login
                         Login
                     </p>
                     <div class="login_form">
-                        <form class="row g-3 needs-validation login_form" method="POST">
+                        <form class="row g-3 login_form" method="POST">
                         {% csrf_token %}
+
+                        <!-- <div class="col-md-12">
+                            <p class="alert alert-danger">
+                                {{ form.error_messages }}
+                            </p>
+                        </div> -->
                 
                             <div class="col-md-12">
                                 <label for="validationCustomUsername" class="form-label">

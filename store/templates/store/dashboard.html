@@ -101,7 +101,7 @@ MedicalStore :: Dashboard
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="card dash_card">
                     <div class="head d-flex">
                       <i class="fas fa-people-carry"></i>
@@ -120,7 +120,7 @@ MedicalStore :: Dashboard
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="card dash_card">
                     <div class="head d-flex">
                       <i class="fas fa-money-bill"></i>
@@ -138,6 +138,26 @@ MedicalStore :: Dashboard
                     </div>
                   </div>
                 </div>
+
+                <div class="col-md-4">
+                  <div class="card dash_card">
+                    <div class="head d-flex">
+                      <i class="fa fa-user" aria-hidden="true"></i>
+
+                      <p class="pl-5 h3">
+                        Profile
+                      </p>
+                    </div>
+                    <div class="footer card-footer d-flex justify-content-between bg-black">
+                      <a href="{% url "store:settings" %}" class="nav-link pr-5">
+                        View
+
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
         </div>
