@@ -3,7 +3,7 @@ from .views import home_page, register_page, login_page, dashboard_page, \
     dealers_page, medicines_page, employees_page, customers_page, purchases_page,\
         confirm_logout_page, add_dealer_page, add_medicine_page, add_employee_page,\
             logout, add_customer_page, add_purchase_page, settings_page, update_dealer,\
-                delete_dealer
+                delete_dealer, update_medicine, delete_medicine
 
 app_name = 'store'
 
@@ -21,9 +21,12 @@ urlpatterns = [
     path('dealers/update-dealer/<int:pk>/', update_dealer, name="update-dealer"),
     path('dealers/delete-dealer/<int:pk>/', delete_dealer, name="delete-dealer"),
 
-
+    # Medicine CRUD
     path('medicines/', medicines_page, name="view-medicines"),
     path('medicines/add-medicine/', add_medicine_page, name="add-medicine"),
+    path('medicines/update-medicine/<int:pk>/', update_medicine, name="update-medicine"),
+    path('medicines/delete-medicine/<int:pk>/', delete_medicine, name="delete-medicine"),
+    
     path('employees/', employees_page, name="view-employees"),
     path('employees/add-employee/', add_employee_page, name="add-employee"),
     path('customers/', customers_page, name="view-customers"),

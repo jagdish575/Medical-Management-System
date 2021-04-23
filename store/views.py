@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
     AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm,\
-        UpdateProfileForm, UpdateUserForm, UpdateDealerForm
+        UpdateProfileForm, UpdateUserForm, UpdateDealerForm,\
+            UpdateMedicineForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -142,6 +143,9 @@ def delete_dealer(request, pk):
     return redirect("store:view-dealers")
 
 
+"""
+Medicine CRUD Starts Here
+"""
 @login_required(login_url="/login/")
 def medicines_page(request):
     medicines = Medicine.objects.all()
@@ -179,6 +183,38 @@ def add_medicine_page(request):
         "form": form
     }
     return render(request, "store/add-medicine.html", context)
+
+
+@login_required(login_url="/login/")
+def update_medicine(request, pk):
+    medicine = Medicine.objects.get(id=pk)
+    form = UpdateMedicineForm(instance=medicine)
+
+    if request.method == "POST":
+        form = UpdateMedicineForm(request.POST, instance=medicine)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have successfully update that medicine.")
+            return redirect("store:view-medicines")
+        return redirect("store:update-medicine")
+
+    context = {
+        "form": form,
+    }
+    return render(request, "store/update-medicine.html", context)
+
+
+@login_required(login_url="/login/")
+def delete_medicine(request, pk):
+    medicine = Medicine.objects.get(id=pk)
+    medicine.delete()
+    messages.success(request, "You have successfully deleted that medicine.")
+    return redirect("store:view-medicines")
+
+
+"""
+Medicine CRUD Ends Here
+"""
 
 
 @login_required(login_url="/login/")
