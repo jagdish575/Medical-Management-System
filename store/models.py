@@ -31,6 +31,12 @@ class Medicine(models.Model):
     def __str__(self):
         return f"{self.med_code}: {self.med_name}"
 
+    def get_update_url(self):
+        return reverse("store:update-medicine", kwargs={"pk": self.pk})
+
+    def get_delete_url(self):
+        return reverse("store:delete-medicine", kwargs={"pk": self.pk})
+
 
 class Employee(models.Model):
     emp_id = models.IntegerField()
