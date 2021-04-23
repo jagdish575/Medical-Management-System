@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
     AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm,\
         UpdateProfileForm, UpdateUserForm, UpdateDealerForm,\
-            UpdateMedicineForm, UpdateEmployeeForm, UpdateCustomerForm
+            UpdateMedicineForm, UpdateEmployeeForm, UpdateCustomerForm,\
+                UpdatePurchaseForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -370,6 +371,9 @@ def delete_customer(request, pk):
 Customer CRUD Ends Here
 """
 
+"""
+Purchase CRUD Starts Here
+"""
 @login_required(login_url="/login/")
 def purchases_page(request):
     purchases = Purchase.objects.all()
@@ -407,6 +411,37 @@ def add_purchase_page(request):
     }
     return render(request, "store/add-purchase.html", context)
 
+
+@login_required(login_url="/login/")
+def update_purchase(request, pk):
+    purchase = Purchase.objects.get(id=pk)
+    form = UpdatePurchaseForm(instance=purchase)
+
+    if request.method == "POST":
+        form = UpdatePurchaseForm(request.POST, instance=purchase)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have successfully update that purchase.")
+            return redirect("store:view-purchases")
+        return redirect("store:update-purchase")
+
+    context = {
+        "form": form,
+    }
+    return render(request, "store/update-purchase.html", context)
+
+
+@login_required(login_url="/login/")
+def delete_purchase(request, pk):
+    purchase = Purchase.objects.get(id=pk)
+    purchase.delete()
+    messages.success(request, "You have successfully deleted that purchase.")
+    return redirect("store:view-purchases")
+
+
+"""
+Purchase CRUD Ends Here
+"""
 
 @login_required(login_url="/login/")
 def confirm_logout_page(request):
