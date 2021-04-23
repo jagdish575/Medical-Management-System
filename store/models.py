@@ -50,6 +50,12 @@ class Employee(models.Model):
     def __str__(self):
         return f"{self.emp_id}: {self.fname} {self.lname}"
 
+    def get_update_url(self):
+        return reverse("store:update-employee", kwargs={"pk": self.pk})
+
+    def get_delete_url(self):
+        return reverse("store:delete-employee", kwargs={"pk": self.pk})
+
 
 class Customer(models.Model):
     fname = models.CharField(max_length=100)
@@ -61,6 +67,12 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.fname} {self.lname}"
 
+    def get_update_url(self):
+        return reverse("store:update-customer", kwargs={"pk": self.pk})
+
+    def get_delete_url(self):
+        return reverse("store:delete-customer", kwargs={"pk": self.pk})
+
 
 class Purchase(models.Model):
     med_name = models.ForeignKey(Medicine, on_delete=models.CASCADE)
@@ -71,17 +83,17 @@ class Purchase(models.Model):
     def __str__(self):
         return f"{self.med_name} {self.customer}"
 
+    def get_update_url(self):
+        return reverse("store:update-purchase", kwargs={"pk": self.pk})
+
+    def get_delete_url(self):
+        return reverse("store:delete-purchase", kwargs={"pk": self.pk})
+
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
     profile_picture = models.ImageField(upload_to="users/")
 
-
-"""
-NOTE:
-
-- get_absolute_url method
-- get_update_url method
-- get_delete_url method
-"""
+    def __str__(self):
+        return self.user.username
