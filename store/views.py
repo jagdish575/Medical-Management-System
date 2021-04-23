@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
     AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm,\
         UpdateProfileForm, UpdateUserForm, UpdateDealerForm,\
-            UpdateMedicineForm
+            UpdateMedicineForm, UpdateEmployeeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -49,7 +49,6 @@ def login_page(request):
     return render(request, "store/login.html", context)
 
 
-
 def register_page(request):
     form = CreateUserForm()
 
@@ -77,6 +76,9 @@ def dashboard_page(request):
     return render(request, "store/dashboard.html", context)
 
 
+"""
+Dealers CRUD Starts Here
+"""
 @login_required(login_url="/login/")
 def dealers_page(request):
     dealers = Dealer.objects.all()
@@ -142,6 +144,9 @@ def delete_dealer(request, pk):
     messages.success(request, "You have successfully deleted that dealer.")
     return redirect("store:view-dealers")
 
+"""
+Dealers CRUD Ends Here
+"""
 
 """
 Medicine CRUD Starts Here
@@ -211,12 +216,13 @@ def delete_medicine(request, pk):
     messages.success(request, "You have successfully deleted that medicine.")
     return redirect("store:view-medicines")
 
-
 """
 Medicine CRUD Ends Here
 """
 
-
+"""
+Employees CRUD Starts Here
+"""
 @login_required(login_url="/login/")
 def employees_page(request):
     employees = Employee.objects.all()
@@ -261,6 +267,35 @@ def add_employee_page(request):
     }
     return render(request, "store/add-employee.html", context)
 
+@login_required(login_url="/login/")
+def update_employee(request, pk):
+    employee = Employee.objects.get(id=pk)
+    form = UpdateEmployeeForm(instance=employee)
+
+    if request.method == "POST":
+        form = UpdateEmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have successfully update that employee.")
+            return redirect("store:view-employees")
+        return redirect("store:update-employee")
+
+    context = {
+        "form": form,
+    }
+    return render(request, "store/update-medicine.html", context)
+
+
+@login_required(login_url="/login/")
+def delete_employee(request, pk):
+    employee = Employee.objects.get(id=pk)
+    employee.delete()
+    messages.success(request, "You have successfully deleted that employee.")
+    return redirect("store:view-employees")
+
+"""
+Employee CRUD Ends Here
+"""
 
 @login_required(login_url="/login/")
 def customers_page(request):

@@ -265,6 +265,61 @@ class AddEmployeeForm(forms.ModelForm):
         }
 
 
+class UpdateEmployeeForm(forms.ModelForm):
+
+    class Meta:
+        model = Employee
+        fields = [
+            "fname", "lname", "address",
+            "salary", "phone_number", "email"
+        ]
+        widgets = {
+            'fname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationFirstName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'lname': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationLastName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': '3',
+                }
+            ),
+            'salary': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPrice',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "tel"
+                }
+            ),
+            'email': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationEmail',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': 'email'
+                }
+            ),
+        }
+
+
 class AddCustomerForm(forms.ModelForm):
 
     class Meta:
