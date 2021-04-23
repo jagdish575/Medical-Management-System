@@ -6,6 +6,24 @@ MedicalStore :: View Customers
 {% endblock title %}
 
 {% block content %}
+<style>
+    div.messages{
+        margin: auto;
+        width: 60%;
+        margin-top: 30px;
+    }
+
+    p.alert {
+        font-weight: 550;
+    }
+
+    @media screen and (max-width: 785px){
+        div.messages{
+            width: 80% !important;
+        }
+    }
+</style>
+
 <section id="dashboard_section" class="dashboard_section">
 
         <!-- Dashboard Sidebar -->
@@ -13,7 +31,19 @@ MedicalStore :: View Customers
 
         <div class="container-fluid">
             <div class="add_dealer">
-                <div class="customer__card card">
+
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <p{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="medicine__card card">
                     <p class="h2">
                         View Customers
                     </p>
@@ -39,6 +69,14 @@ MedicalStore :: View Customers
                                     <td>{{ customer.phone_number }}</td>
                                     <td>{{ customer.email }}</td>
                                     <td>{{ customer.address }}</td>
+                                    <td>
+                                        <a href="{{ customer.get_update_url }}" class="text-white">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="{{ customer.get_delete_url }}" class="text-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
