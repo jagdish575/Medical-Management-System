@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 
@@ -11,6 +12,12 @@ class Dealer(models.Model):
 
     def __str__(self):
         return f"{self.fname} {self.lname}" 
+
+    def get_update_url(self):
+        return reverse("store:update-dealer", kwargs={"pk": self.pk})
+
+    def get_delete_url(self):
+        return reverse("store:delete-dealer", kwargs={"pk": self.pk})
 
 
 class Medicine(models.Model):
