@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from PIL import Image
 
 class Dealer(models.Model):
     fname = models.CharField(max_length=100)
@@ -108,6 +108,7 @@ class Profile(models.Model):
             output_size = (300, 300)
             profile_picture.thumbnail(output_size)
         print(profile_picture)
+        
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
