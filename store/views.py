@@ -1,20 +1,23 @@
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
-    AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm
+    AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm,\
+        UpdateProfileForm, UpdateUserForm, UpdateDealerForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import (
     Dealer, Medicine, Employee,
-    Customer, Purchase,
+    Customer, Purchase, Profile
 )
+from django.contrib.auth.forms import UserCreationForm,\
+    AuthenticationForm
 
 
 def home_page(request):
     return render(request, "store/home.html")
 
 
-@login_required
+@login_required(login_url="/login/")
 def logout_page(request):
     logout(request)
     return redirect("store:login")
@@ -26,13 +29,11 @@ def login_page(request):
     if request.method == "POST":
         form = LogUserForm(request.POST)
         if form.is_valid():
-            print(form)
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(
                 request, username=username, password=password
             )
-
             if user is not None:
                 login(request, user)
                 messages.success(request, f"{username}, you are logged in.")
@@ -67,7 +68,7 @@ def register_page(request):
     return render(request, "store/register.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def dashboard_page(request):
     context = {
 
@@ -75,7 +76,7 @@ def dashboard_page(request):
     return render(request, "store/dashboard.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def dealers_page(request):
     dealers = Dealer.objects.all()
 
@@ -85,7 +86,7 @@ def dealers_page(request):
     return render(request, "store/view-dealers.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def add_dealer_page(request):
     form = AddDealerForm()
 
@@ -114,7 +115,34 @@ def add_dealer_page(request):
     return render(request, "store/add-dealer.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
+def update_dealer(request, pk):
+    dealer = Dealer.objects.get(id=pk)
+    form = UpdateDealerForm(instance=dealer)
+
+    if request.method == "POST":
+        form = UpdateDealerForm(request.POST, instance=dealer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have successfully update that dealer.")
+            return redirect("store:view-dealers")
+        return redirect("store:update-dealer")
+
+    context = {
+        "form": form,
+    }
+    return render(request, "store/update-dealer.html", context)
+
+
+@login_required(login_url="/login/")
+def delete_dealer(request, pk):
+    dealer = Dealer.objects.get(id=pk)
+    dealer.delete()
+    messages.success(request, "You have successfully deleted that dealer.")
+    return redirect("store:view-dealers")
+
+
+@login_required(login_url="/login/")
 def medicines_page(request):
     medicines = Medicine.objects.all()
 
@@ -124,7 +152,7 @@ def medicines_page(request):
     return render(request, "store/view-medicines.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def add_medicine_page(request):
     form = AddMedicineForm()
 
@@ -153,7 +181,7 @@ def add_medicine_page(request):
     return render(request, "store/add-medicine.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def employees_page(request):
     employees = Employee.objects.all()
 
@@ -163,7 +191,7 @@ def employees_page(request):
     return render(request, "store/view-employees.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def add_employee_page(request):
     form = AddEmployeeForm()
 
@@ -198,7 +226,7 @@ def add_employee_page(request):
     return render(request, "store/add-employee.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def customers_page(request):
     customers = Customer.objects.all()
 
@@ -208,7 +236,7 @@ def customers_page(request):
     return render(request, "store/view-customers.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def add_customer_page(request):
     form = AddCustomerForm()
 
@@ -237,7 +265,7 @@ def add_customer_page(request):
     return render(request, "store/add-customer.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def purchases_page(request):
     purchases = Purchase.objects.all()
 
@@ -247,7 +275,7 @@ def purchases_page(request):
     return render(request, "store/view-purchases.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def add_purchase_page(request):
     form = AddPurchaseForm()
 
@@ -275,34 +303,30 @@ def add_purchase_page(request):
     return render(request, "store/add-purchase.html", context)
 
 
-@login_required
+@login_required(login_url="/login/")
 def confirm_logout_page(request):
     return render(request, "store/confirm-logout.html")
 
 
-@login_required
+@login_required(login_url="/login/")
 def settings_page(request):
-    return render(request, "store/settings.html")
-# @login_required
-# def profile_page(request):
-#     u_form = UpdateUserForm(instance=request.user)
-#     p_form = UpdateProfileForm(instance=request.user.profile)
+    u_form = UpdateUserForm(instance=request.user)
+    p_form = UpdateProfileForm(instance=request.user)
 
-#     if request.method == "POST":
-#         p_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
-#         u_form = UpdateUserForm(instance=request.user, data=request.POST)
+    if request.method == "POST":
+        p_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        u_form = UpdateUserForm(instance=request.user, data=request.POST)
 
-#         if p_form.is_valid() and u_form.is_valid():
-#             username = u_form.cleaned_data.get("username")
-#             p_form.user = username
-#             p_form.save()
-#             messages.success(request, f"{username}, you profile has successfully been updated.")
-#             return redirect("note:profile")
-#         return redirect("note:profile")
+        if p_form.is_valid() and u_form.is_valid():
+            username = u_form.cleaned_data.get("username")
+            p_form.user = username
+            p_form.save()
+            messages.success(request, f"{username}, you profile has successfully been updated.")
+            return redirect("store:dashboard")
+        return redirect("store:settings")
 
-#     context = {
-#         'p_form': p_form,
-#         'u_form': u_form
-#     }
-
-#     return render(request, "note_frontend/profile.html", context)
+    context = {
+        "p_form": p_form,
+        "u_form": u_form
+    }
+    return render(request, "store/settings.html", context)
