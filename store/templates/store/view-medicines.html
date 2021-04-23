@@ -6,6 +6,24 @@ MedicalStore :: View Medicines
 {% endblock title %}
 
 {% block content %}
+<style>
+    div.messages{
+        margin: auto;
+        width: 60%;
+        margin-top: 30px;
+    }
+
+    p.alert {
+        font-weight: 550;
+    }
+
+    @media screen and (max-width: 785px){
+        div.messages{
+            width: 80% !important;
+        }
+    }
+</style>
+
 <section id="dashboard_section" class="dashboard_section">
 
         <!-- Dashboard Sidebar -->
@@ -13,6 +31,18 @@ MedicalStore :: View Medicines
 
         <div class="container-fluid">
             <div class="add_dealer">
+
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <p{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
                 <div class="dealers__card card">
                     <p class="h2">
                         View Medicines
@@ -41,6 +71,14 @@ MedicalStore :: View Medicines
                                     <td>{{ medicine.price }}</td>
                                     <td>{{ medicine.stock }}</td>
                                     <td>{{ medicine.description }}</td>
+                                    <td>
+                                        <a href="{{ medicine.get_update_url }}" class="text-white">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="{{ medicine.get_delete_url }}" class="text-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
