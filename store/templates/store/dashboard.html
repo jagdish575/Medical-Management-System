@@ -34,6 +34,22 @@ MedicalStore :: Dashboard
       font-size: 28px;
       color: #000;
     }
+
+    div.messages{
+      margin: auto;
+      width: 60%;
+      margin-top: 30px;
+    }
+
+    p.alert {
+      font-weight: 550;
+    }
+
+    @media screen and (max-width: 785px){
+        div.messages{
+          width: 80% !important;
+        }
+    }
   </style>
 
   <section id="dashboard_section" class="dashboard_section">
@@ -43,6 +59,18 @@ MedicalStore :: Dashboard
 
         <div class="container-fluid">
             <div class="dashboard">
+
+              {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <p{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </p>
+                    {% endfor %}
+                </div>
+              {% endif %}
+
               <div class="row">
                 <div class="col-md-4">
                   <div class="card dash_card">

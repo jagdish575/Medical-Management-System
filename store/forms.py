@@ -154,7 +154,6 @@ class AddMedicineForm(forms.ModelForm):
         }
 
 
-
 class UpdateMedicineForm(forms.ModelForm):
     
     class Meta:
@@ -207,7 +206,6 @@ class UpdateMedicineForm(forms.ModelForm):
                 }
             ),
         }
-
 
 
 class AddEmployeeForm(forms.ModelForm):
@@ -534,7 +532,7 @@ class CreateUserForm(UserCreationForm):
     }
 
 
-class LogUserForm(AuthenticationForm):
+class LogUserForm(forms.Form):
     """
     A form that inherits from the base *Form* class,
     and logs a user, with no privileges, from the given 

@@ -33,9 +33,11 @@ def login_page(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
+            print(username, password)
             user = authenticate(
                 request, username=username, password=password
             )
+            print(user)
             if user is not None:
                 login(request, user)
                 messages.success(request, f"{username}, you are logged in.")
