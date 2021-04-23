@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
     AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm,\
         UpdateProfileForm, UpdateUserForm, UpdateDealerForm,\
-            UpdateMedicineForm, UpdateEmployeeForm
+            UpdateMedicineForm, UpdateEmployeeForm, UpdateCustomerForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -267,6 +267,7 @@ def add_employee_page(request):
     }
     return render(request, "store/add-employee.html", context)
 
+
 @login_required(login_url="/login/")
 def update_employee(request, pk):
     employee = Employee.objects.get(id=pk)
@@ -297,6 +298,9 @@ def delete_employee(request, pk):
 Employee CRUD Ends Here
 """
 
+"""
+Customer CRUD Starts Here
+"""
 @login_required(login_url="/login/")
 def customers_page(request):
     customers = Customer.objects.all()
@@ -335,6 +339,36 @@ def add_customer_page(request):
     }
     return render(request, "store/add-customer.html", context)
 
+
+@login_required(login_url="/login/")
+def update_customer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    form = UpdateCustomerForm(instance=customer)
+
+    if request.method == "POST":
+        form = UpdateCustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have successfully update that customer.")
+            return redirect("store:view-customers")
+        return redirect("store:update-customer")
+
+    context = {
+        "form": form,
+    }
+    return render(request, "store/update-customer.html", context)
+
+
+@login_required(login_url="/login/")
+def delete_customer(request, pk):
+    customer = Customer.objects.get(id=pk)
+    customer.delete()
+    messages.success(request, "You have successfully deleted that customer.")
+    return redirect("store:view-customers")
+
+"""
+Customer CRUD Ends Here
+"""
 
 @login_required(login_url="/login/")
 def purchases_page(request):

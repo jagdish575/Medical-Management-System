@@ -4,7 +4,7 @@ from .views import home_page, register_page, login_page, dashboard_page, \
         confirm_logout_page, add_dealer_page, add_medicine_page, add_employee_page,\
             logout, add_customer_page, add_purchase_page, settings_page, update_dealer,\
                 delete_dealer, update_medicine, delete_medicine, update_employee,\
-                    delete_employee
+                    delete_employee, update_customer, delete_customer
 
 app_name = 'store'
 
@@ -34,8 +34,12 @@ urlpatterns = [
     path('employees/update-employee/<int:pk>/', update_employee, name="update-employee"),
     path('employees/delete-employee/<int:pk>/', delete_employee, name="delete-employee"),
 
+    # Customer CRUD
     path('customers/', customers_page, name="view-customers"),
     path('customers/add-customer/', add_customer_page, name="add-customer"),
+    path('customers/update-customer/<int:pk>/', update_customer, name="update-customer"),
+    path('customers/delete-customer/<int:pk>/', delete_customer, name="delete-customer"),
+
     path('purchases/', purchases_page, name="view-purchases"),
     path('purchases/add-purchase/', add_purchase_page, name="add-purchase"),
     path('settings/', settings_page, name="settings")
