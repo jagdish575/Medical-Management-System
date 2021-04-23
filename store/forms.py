@@ -154,6 +154,62 @@ class AddMedicineForm(forms.ModelForm):
         }
 
 
+
+class UpdateMedicineForm(forms.ModelForm):
+    
+    class Meta:
+        model = Medicine
+        fields = [
+            "med_code", "med_name", "dealer_name",
+            "price", "stock", "description"
+        ]
+        widgets = {
+            'med_code': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationMedCode',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'med_name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationMedName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'dealer_name': forms.Select(attrs={
+                'class': 'form-control',
+                'id': 'validationMedName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'price': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPrice',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'stock': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': '3',
+                }
+            ),
+        }
+
+
+
 class AddEmployeeForm(forms.ModelForm):
 
     class Meta:
