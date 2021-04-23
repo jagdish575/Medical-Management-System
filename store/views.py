@@ -283,7 +283,7 @@ def update_employee(request, pk):
     context = {
         "form": form,
     }
-    return render(request, "store/update-medicine.html", context)
+    return render(request, "store/update-employee.html", context)
 
 
 @login_required(login_url="/login/")
