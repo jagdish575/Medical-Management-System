@@ -57,11 +57,17 @@
                                 </a>
                             </li> {% endcomment %}
                             
-                            <li class="account">
-                                <a href="{% url 'store:register' %}" class="nav-link">
-                                    Register <i class="fa fa-user pr-3" aria-hidden="true"></i>
+                            {% if user.is_authenticated %}
+                            <li class="accounts navbar-nav">
+                                <a href="{% url 'store:logout' %}" class="nav-link">
+                                    Logout <i class="fa fa-power-off" aria-hidden="true"></i>
                                 </a>
                             </li>
+                            {% else %}
+                            <a href="{% url 'store:login' %}" class="nav-link">
+                                Sign In <i class="fa ml-4 fa-television" aria-hidden="true"></i>
+                            </a>
+                            {% endif %}
                         </ul>
 
                     </div>
