@@ -1,6 +1,6 @@
 {% load static %}
 <header class="home__header">
-    <nav class="navbar-expand-sm top__nav">
+    <!-- <nav class="navbar-expand-sm top__nav">
         <div class="container">
             <div class="top__nav__flex">
                 <div class="tel">
@@ -29,14 +29,14 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
 
     <nav class="navbar-expand-sm main__nav">
         <div class="container-fluid">
             <div class="main__nav__body">
                 <div class="main__nav__flex">
                     <!-- Logo -->
-                    <a href="" class="navbar-brand">
+                    <a href="{% url "store:home" %}" class="navbar-brand">
                         <img src="{% static 'images/logo.png' %}" alt="" class="img-responsive">
                         <span class="logo__name">
                             KSITM Med. Store
@@ -51,11 +51,6 @@
     
                         <!-- Main Login/Register -->
                         <ul class="accounts navbar-nav">
-                            {% comment %} <li class="account">
-                                <a href="login.html" class="nav-link">
-                                    Login 
-                                </a>
-                            </li> {% endcomment %}
                             
                             {% if user.is_authenticated %}
                             <li class="accounts navbar-nav">
@@ -64,8 +59,8 @@
                                 </a>
                             </li>
                             {% else %}
-                            <a href="{% url 'store:login' %}" class="nav-link">
-                                Sign In <i class="fa ml-4 fa-television" aria-hidden="true"></i>
+                            <a href="{% url 'store:register' %}" class="nav-link">
+                                Register <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
                             {% endif %}
                         </ul>
