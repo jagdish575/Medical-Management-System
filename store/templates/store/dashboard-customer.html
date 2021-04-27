@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-MedicalStore :: Dashboard
+MedicalStore :: Customer Dashboard
 {% endblock title %}
 
 {% block content %}
@@ -54,7 +54,7 @@ MedicalStore :: Dashboard
   <section id="dashboard_section" class="dashboard_section">
         
         <!-- Dashboard Sidebar -->
-        {% include "store/_dashboard-bar.html" %}
+        {% include "store/_dashboard-customer.html" %}
 
         <div class="container-fluid">
             <div class="dashboard">
@@ -71,6 +71,25 @@ MedicalStore :: Dashboard
               {% endif %}
 
               <div class="row">
+                  <div class="col-md-6">
+                  <div class="card dash_card">
+                    <div class="head d-flex">
+                      <i class="fas fa-pills"></i>
+
+                      <p class="pl-5 h3">
+                        Medicines
+                      </p>
+                    </div>
+                    <div class="footer card-footer d-flex justify-content-between bg-black">
+                      <a href="{% url "store:view-medicines" %}" class="nav-link pr-5">
+                        View
+
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
                 <div class="col-md-6">
                   <div class="card dash_card">
                     <div class="head d-flex">
@@ -82,25 +101,6 @@ MedicalStore :: Dashboard
                     </div>
                     <div class="footer card-footer d-flex justify-content-between bg-black">
                       <a href="{% url "store:view-dealers" %}" class="nav-link pr-5">
-                        View
-
-                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="card dash_card">
-                    <div class="head d-flex">
-                      <i class="fas fa-pills"></i>
-
-                      <p class="pl-5 h3">
-                        Medicines
-                      </p>
-                    </div>
-                    <div class="footer card-footer d-flex justify-content-between bg-black">
-                      <a href="{% url "store:view-medicines" %}" class="nav-link pr-5">
                         View
 
                         <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
