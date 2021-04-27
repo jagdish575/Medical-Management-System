@@ -92,7 +92,7 @@ class Purchase(models.Model):
         return reverse("store:delete-purchase", kwargs={"pk": self.pk})
 
 
-class Profile(models.Model):
+class AdminProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
     profile_picture = models.ImageField(default="users/me.jpg", upload_to="users/")
@@ -113,7 +113,7 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        AdminProfile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
