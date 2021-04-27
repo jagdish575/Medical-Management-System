@@ -3,14 +3,15 @@ from .forms import CreateUserForm, LogUserForm, AddDealerForm,\
     AddMedicineForm, AddEmployeeForm, AddCustomerForm, AddPurchaseForm,\
         UpdateProfileForm, UpdateUserForm, UpdateDealerForm,\
             UpdateMedicineForm, UpdateEmployeeForm, UpdateCustomerForm,\
-                UpdatePurchaseForm
+                UpdatePurchaseForm, AddOrderForm, UpdateOrderForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import (
+from store.models import (
     Dealer, Medicine, Employee,
-    Customer, Purchase, Profile
+    Customer, Purchase, AdminProfile
 )
+from customer.models import Order
 from django.contrib.auth.forms import UserCreationForm,\
     AuthenticationForm
 
@@ -122,13 +123,85 @@ def register_customer(request):
     return render(request, "store/register-admin.html")
 
 
-@login_required(login_url="/login/")
-def dashboard_page(request):
+@login_required(login_url="/login/admin/")
+def dashboard_admin(request):
+    return render(request, "store/dashboard-admin.html")
+
+
+@login_required(login_url="/login/customer/")
+def dashboard_customer(request):
+    return render(request, "store/dashboard-customer.html")
+
+
+"""
+Order CRUD Starts Here
+"""
+@login_required(login_url="/login/customer/")
+def orders_page(request):
+    orders = Order.objects.all()
+
     context = {
-
+        "orders": orders
     }
-    return render(request, "store/dashboard.html", context)
+    return render(request, "store/view-orders.html", context)
 
+
+@login_required(login_url="/login/customer/")
+def add_order_page(request):
+    form = AddOrderForm()
+
+    if request.method == "POST":
+        form = AddOrderForm(request.POST)
+        if form.is_valid():
+            customer = form.cleaned_data.get("customer")
+            med_name = form.cleaned_data.get("med_name")
+            price = form.cleaned_data.get("price")
+            quantity = form.cleaned_data.get("quantity")
+
+            order = Order(
+                customer=customer, med_name=med_name, 
+                price=price, quantity=quantity
+            )
+            order.save()
+            messages.success(request, "You have added a new order.")
+            return redirect("store:view-orders")
+        return redirect("store:add-order")
+    
+    context = {
+        "form": form
+    }
+    return render(request, "store/add-order.html", context)
+
+
+@login_required(login_url="/login/customer/")
+def update_order_page(request, pk):
+    order = Order.objects.get(id=pk)
+    form = AddOrderForm(instance=order)
+
+    if request.method == "POST":
+        form = AddOrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have updated that order.")
+            return redirect("store:view-orders")
+        return redirect("store:add-order")
+
+    context = {
+        "form": form
+    }
+    return render(request, "store/update-order.html", context)
+
+
+@login_required(login_url="/login/customer/")
+def delete_order_page(request, pk):
+    order = Order.objects.get(id=pk)
+    order.delete()
+    messages.success(request, "You have successfully deleted that order.")
+    return redirect("store:view-orders")
+
+"""
+Order CRUD Ends Here
+"""
 
 """
 Dealers CRUD Starts Here

@@ -1,12 +1,14 @@
 from django.urls import path
-from .views import home_page, register_page, login_page, dashboard_page, \
+from .views import home_page, register_page, login_page, dashboard_admin, \
     dealers_page, medicines_page, employees_page, customers_page, purchases_page,\
         confirm_logout_page, add_dealer_page, add_medicine_page, add_employee_page,\
             logout_page, add_customer_page, add_purchase_page, settings_page, update_dealer,\
                 delete_dealer, update_medicine, delete_medicine, update_employee,\
                     delete_employee, update_customer, delete_customer, update_purchase,\
                         delete_purchase, register_admin, register_customer, \
-                            login_admin, login_customer
+                            login_admin, login_customer, dashboard_customer, \
+                                orders_page, add_order_page, update_order_page, \
+                                    delete_order_page
 
 app_name = 'store'
 
@@ -25,7 +27,8 @@ urlpatterns = [
     
     path('confirm-logout/', confirm_logout_page, name="confirm-logout"),
     path('confirm-logout/logout/', logout_page, name="logout"),
-    path('dashboard/', dashboard_page, name="dashboard"),
+    path('dashboard/admin/', dashboard_admin, name="dashboard-admin"),
+    path('dashboard/customer/', dashboard_customer, name="dashboard-customer"),
 
     # Dealer CRUD
     path('dealers/', dealers_page, name="view-dealers"),
@@ -56,6 +59,12 @@ urlpatterns = [
     path('purchases/add-purchase/', add_purchase_page, name="add-purchase"),
     path('purchases/update-purchase/<int:pk>/', update_purchase, name="update-purchase"),
     path('purchases/delete-purchase/<int:pk>/', delete_purchase, name="delete-purchase"),
+
+    # Order CRUD
+    path('orders/', orders_page, name="view-orders"),
+    path('orders/add-order/', add_order_page, name="add-order"),
+    path('orders/update/<int:pk>/', update_order_page, name="update-order"),
+    path('orders/delete-order/<int:pk>/', delete_order_page, name="delete-order"),
 
     path('settings/', settings_page, name="settings")
 ]
