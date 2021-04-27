@@ -95,7 +95,7 @@ class Purchase(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
-    profile_picture = models.ImageField(upload_to="users/")
+    profile_picture = models.ImageField(default="users/me.jpg", upload_to="users/")
 
     def __str__(self):
         return self.user.username
@@ -116,6 +116,6 @@ def create_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
 
 
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

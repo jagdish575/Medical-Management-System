@@ -2,77 +2,64 @@
 {% load static %}
 
 {% block title %}
-MedicalStore :: Login
+MedicalStore :: Register
 {% endblock title %}
 
 {% block content %}
-    <style>
-        section.login__body{
-            padding-bottom: 100px !important;
-        }
-    </style>
+<style>
+    section.login__section{
+        height: 100vh;
+    }
+
+    section.login_body{
+        margin-top:100px;
+    }
+
+    div.login_card{
+        padding-bottom: 50px;
+    }
+
+    div.login_card p.h3{
+        margin-bottom: 30px !important;
+    }
+
+    div.login_card div.d-flex{
+        justify-content: center;
+        margin-right: 10px !important;
+    }
+
+    div.d-flex a.link{
+        font-weight: 600 !important;
+        margin-right: 20px !important;
+    }
+</style>
     <section class="login__section">
         {% include "store/_header.html" %}
 
-        <section class="login__body">
+        <section class="login_body">
             <div class="container">
                 <div class="login_card card">
                     <p class="h3">
                         Login
                     </p>
-                    <div class="login_form">
-                        <form class="row g-3 login_form" method="POST">
-                        {% csrf_token %}
+                    
+                    <div class="d-flex">
+                        <a href="{% url "store:login-admin" %}" class="link btn btn-primary">
+                            <i class="fas fa-hospital"></i>
+                            As Admin
+                        </a>
 
-                        <!-- <div class="col-md-12">
-                            <p class="alert alert-danger">
-                                {{ form.error_messages }}
-                            </p>
-                        </div> -->
-                
-                            <div class="col-md-12">
-                                <label for="validationCustomUsername" class="form-label">
-                                    Username:
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                    {{ form.username }}
-                                    <div class="invalid-feedback">
-                                        Please choose a username.
-                                    </div>
-                                </div>
-                            </div>
-                
-                            <div class="col-md-12">
-                                <label for="validationCustom03" class="form-label">
-                                    Password:
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="inputGroupPrepend">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </span>
-                                    {{ form.password }}
-                                    <div class="invalid-feedback">
-                                        Your password must be minimum of 8 characters.
-                                    </div>
-                                </div>
-                            </div>
-                
-                            <div class="col-12">
-                                <div class="forgotten_password">
-                                    <p class="h6">
-                                        Don't have an account? <a href="{% url "store:register" %}">Register</a>
-                                    </p>
-                                </div>
-                                <div class="col-12 pb-3">
-                                    <button class="btn btn-block login-button" type="submit">Login</button>
-                                </div>
-                            </div>
-                        </form>
+                        <a href="{% url "store:login-customer" %}" class="link btn btn-success">
+                            <i class="fas fa-people-carry"></i>
+                            As Customer
+                        </a>
                     </div>
                 </div>
             </div>
-        </main>
+            </main>
 
-    </section>
+        </section>
+
+        <script src="assets/js/mdb.min.js"></script>
+        <script src=""></script>
 {% endblock content %}

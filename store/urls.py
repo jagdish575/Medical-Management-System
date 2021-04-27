@@ -2,19 +2,29 @@ from django.urls import path
 from .views import home_page, register_page, login_page, dashboard_page, \
     dealers_page, medicines_page, employees_page, customers_page, purchases_page,\
         confirm_logout_page, add_dealer_page, add_medicine_page, add_employee_page,\
-            logout, add_customer_page, add_purchase_page, settings_page, update_dealer,\
+            logout_page, add_customer_page, add_purchase_page, settings_page, update_dealer,\
                 delete_dealer, update_medicine, delete_medicine, update_employee,\
                     delete_employee, update_customer, delete_customer, update_purchase,\
-                        delete_purchase
+                        delete_purchase, register_admin, register_customer, \
+                            login_admin, login_customer
 
 app_name = 'store'
 
 urlpatterns = [
     path('', home_page, name="home"),
+
+    # Register Path
     path('register/', register_page, name="register"),
+    path('register/admin/', register_admin, name="register-admin"),
+    path('register/customer/', register_customer, name="register-customer"),
+    
+    # Login Path
     path('login/', login_page, name="login"),
+    path('login/admin/', login_admin, name="login-admin"),
+    path('login/customer/', login_customer, name="login-customer"),
+    
     path('confirm-logout/', confirm_logout_page, name="confirm-logout"),
-    path('confirm-logout/logout/', logout, name="logout"),
+    path('confirm-logout/logout/', logout_page, name="logout"),
     path('dashboard/', dashboard_page, name="dashboard"),
 
     # Dealer CRUD

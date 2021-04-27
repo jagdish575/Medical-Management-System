@@ -19,13 +19,17 @@ def home_page(request):
     return render(request, "store/home.html")
 
 
-@login_required(login_url="/login/")
 def logout_page(request):
     logout(request)
-    return redirect("store:login")
+    messages.success(request, "You have successfully logged out!")
+    return redirect("store:home")
 
 
 def login_page(request):
+    return render(request, "store/login.html")
+
+
+def login_admin(request):
     form = LogUserForm()
 
     if request.method == "POST":
@@ -48,13 +52,42 @@ def login_page(request):
     context = {
         'form': form
     }
+    return render(request, "store/login-admin.html", context)
 
-    return render(request, "store/login.html", context)
+
+def login_customer(request):
+    form = LogUserForm()
+
+    if request.method == "POST":
+        form = LogUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            print(username, password)
+            user = authenticate(
+                request, username=username, password=password
+            )
+            print(user)
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"{username}, you are logged in.")
+                return redirect("store:dashboard")
+            messages.error(request, f"Oops, the username {username} does not exist in our database. Please try again.")
+        return redirect("store:login")
+
+    context = {
+        'form': form
+    }
+    return render(request, "store/login-customer.html", context)
 
 
 def register_page(request):
-    form = CreateUserForm()
+    return render(request, "store/register.html")
 
+
+def register_admin(request):
+    form = CreateUserForm()
+    
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
@@ -68,7 +101,25 @@ def register_page(request):
         'form': form
     }
 
-    return render(request, "store/register.html", context)
+    return render(request, "store/register-admin.html", context)
+
+
+def register_customer(request):
+    form = CreateUserForm()
+    
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your account has successfully been created.")
+            return redirect("store:login")
+        print("Something's not right.")
+        return redirect("store:register")
+
+    context = {
+        'form': form
+    }
+    return render(request, "store/register-admin.html")
 
 
 @login_required(login_url="/login/")
@@ -453,7 +504,7 @@ def confirm_logout_page(request):
 @login_required(login_url="/login/")
 def settings_page(request):
     u_form = UpdateUserForm(instance=request.user)
-    p_form = UpdateProfileForm(instance=request.user)
+    p_form = UpdateProfileForm(instance=request.user.profile)
 
     if request.method == "POST":
         p_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)

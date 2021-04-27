@@ -145,11 +145,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "store/static"
 ]
-STATIC_ROOT = "/staticfiles/"
+STATIC_ROOT = "staticfiles/"
 
-MEDIA_ROOT = "/media/"
-MEDIA_URL = "/media/"
+MEDIA_ROOT = "media/"
+MEDIA_URL = "media/"
