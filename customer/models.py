@@ -2,7 +2,19 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from store.models import Medicine
 from PIL import Image
+
+
+class Order(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    med_name = models.ForeignKey(Medicine, on_delete=models.CASCADE)
+    price = models.FloatField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.customer}: {self.med_name}"
 
 
 class CustomerProfile(models.Model):
