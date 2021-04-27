@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Dealer, Medicine, Employee, Customer,\
     Purchase, AdminProfile
+from customer.models import Order
 from django.contrib.auth.forms import UserCreationForm,\
     AuthenticationForm
 
@@ -415,19 +416,19 @@ class AddPurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
         fields = [
-            "med_name", "customer", "price_number", "quantity"
+            "customer", "med_name", "price_number", "quantity"
         ]
         widgets = {
-            'med_name': forms.Select(attrs={
+            'customer': forms.Select(attrs={
                 'class': 'form-control',
-                'id': 'validationMedName',
+                'id': 'validationCustomer',
                 'aria-describedby': 'inputGroupPrepend',
                 'required': "true",
                 }
             ),
-            'customer': forms.Select(attrs={
+            'med_name': forms.Select(attrs={
                 'class': 'form-control',
-                'id': 'validationCustomer',
+                'id': 'validationMedName',
                 'aria-describedby': 'inputGroupPrepend',
                 'required': "true",
                 }
@@ -449,7 +450,6 @@ class AddPurchaseForm(forms.ModelForm):
                 }
             ),
         }
-
 
 class UpdatePurchaseForm(forms.ModelForm):
 
@@ -490,6 +490,89 @@ class UpdatePurchaseForm(forms.ModelForm):
                 }
             ),
         }
+
+
+class AddOrderForm(forms.ModelForm):
+
+    class Meta:
+        model = Order
+        fields = [
+            "customer", "med_name", "price", "quantity"
+        ]
+        widgets = {
+            'med_name': forms.Select(attrs={
+                'class': 'form-control',
+                'id': 'validationMedName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'customer': forms.Select(attrs={
+                'class': 'form-control',
+                'id': 'validationCustomer',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'price': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPrice',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'quantity': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+        }
+
+
+class UpdateOrderForm(forms.ModelForm):
+
+    class Meta:
+        model = Order
+        fields = [
+            "customer", "med_name", "price", "quantity"
+        ]
+        widgets = {
+            'med_name': forms.Select(attrs={
+                'class': 'form-control',
+                'id': 'validationMedName',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'customer': forms.Select(attrs={
+                'class': 'form-control',
+                'id': 'validationCustomer',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                }
+            ),
+            'price': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationPrice',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+            'quantity': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'validationStock',
+                'aria-describedby': 'inputGroupPrepend',
+                'required': "true",
+                'type': "number"
+                }
+            ),
+        }
+
 
 class CreateUserForm(UserCreationForm):
     """
