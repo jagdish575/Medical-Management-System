@@ -1,9 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import (
-    Dealer, Medicine, Employee,
-    Customer, Purchase, Profile
-)
+from .models import Dealer, Medicine, Employee, Customer,\
+    Purchase, AdminProfile
 from django.contrib.auth.forms import UserCreationForm,\
     AuthenticationForm
 
@@ -566,7 +564,7 @@ class UpdateProfileForm(forms.ModelForm):
     """
     profile_picture = forms.FileField()
     class Meta:
-        model = Profile
+        model = AdminProfile
         fields = ['user', 'phone_number', 'profile_picture']
         widgets = {
             'phone_number': forms.TextInput(attrs={
