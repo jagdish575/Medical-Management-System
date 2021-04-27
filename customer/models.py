@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 from store.models import Medicine
 from PIL import Image
 
@@ -15,6 +16,12 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.customer}: {self.med_name}"
+
+    def get_update_url(self):
+        return reverse("store:update-order", kwargs={"pk": self.pk})
+
+    def get_delete_url(self):
+        return reverse("store:delete-order", kwargs={"pk": self.pk})
 
 
 class CustomerProfile(models.Model):
