@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, CustomerProfile
+from .models import Order
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -12,14 +12,14 @@ class OrderAdmin(admin.ModelAdmin):
     ]
 
 
-class CustomerProfileAdmin(admin.ModelAdmin):
-    list_display = [
-        "id", "user", 
-        "profile_picture", "phone_number"
-    ]
-    list_display_links = [
-        "id", "user"
-    ]
+# class ProfileAdmin(admin.ModelAdmin):
+#     list_display = [
+#         "id", "user", 
+#         "profile_picture", "phone_number"
+#     ]
+#     list_display_links = [
+#         "id", "user"
+#     ]
 
 admin.site.register(Order, OrderAdmin)
-admin.site.register(CustomerProfile)
+# admin.site.register(Profile, ProfileAdmin)
