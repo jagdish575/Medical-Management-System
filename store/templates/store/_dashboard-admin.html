@@ -149,8 +149,8 @@
 
                 <a class="navbar-brand nav_image" href="#">
                     <img src="{% static 'images/medicine.png' %}" alt="" class="img-responsive">
-                    <span class="nav_span">
-                        Hi, Israel!
+                    <span class="nav_span" style="font-weight: 550;">
+                        Hi, {{ request.user.username }}!
                     </span>
                 </a>
 

@@ -35,10 +35,10 @@
                         </a>
 
                         <div class="dealer__items" id="dealerItems">
-                            <a href="{% url "store:add-order" %}" class="dealer__item">
+                            <a href="{% url "customer:add-order" %}" class="dealer__item">
                                 > Add Order
                             </a>
-                            <a href="{% url "store:view-orders" %}" class="dealer__item">
+                            <a href="{% url "customer:view-orders" %}" class="dealer__item">
                                 > View Orders
                             </a>
                         </div>
@@ -52,10 +52,10 @@
                         </a>
 
                         <div class="medicine__items" id="medicineItems">
-                            <a href="{% url 'store:add-medicine' %}" class="dealer__item">
+                            <a href="{% url 'customer:add-medicine' %}" class="dealer__item">
                                 > Add Medicine
                             </a>
-                            <a href="{% url 'store:view-medicines' %}" class="dealer__item">
+                            <a href="{% url 'customer:view-medicines' %}" class="dealer__item">
                                 > View Medicines
                             </a>
                         </div>
@@ -70,10 +70,10 @@
                         </a>
 
                         <div class="purchase__items" id="purchaseItems">
-                            <a href="{% url 'store:add-purchase' %}" class="dealer__item">
+                            <a href="{% url 'customer:add-purchase' %}" class="dealer__item">
                                 > Add Purchase
                             </a>
-                            <a href="{% url 'store:view-purchases' %}" class="dealer__item">
+                            <a href="{% url 'customer:view-purchases' %}" class="dealer__item">
                                 > View Purchases
                             </a>
                         </div>
@@ -117,13 +117,13 @@
                 <a class="navbar-brand nav_image" href="#">
                     <img src="{% static 'images/medicine.png' %}" alt="" class="img-responsive">
                     <span class="nav_span">
-                        Hi, Israel!
+                        Hi, {{ request.user.username }}!
                     </span>
                 </a>
 
                 {% comment %} <div class="navbar-nav">
                     <div class="navbar_flex">
-                        <a href="{% url 'store:confirm-logout' %}" class="nav-link logout">
+                        <a href="{% url 'customer:confirm-logout' %}" class="nav-link logout">
                             <i class="fa fa-power-off" aria-hidden="true"></i>
                             Logout
                         </a>
