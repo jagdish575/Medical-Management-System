@@ -6,9 +6,7 @@ from .views import home_page, register_page, login_page, dashboard_admin, \
                 delete_dealer, update_medicine, delete_medicine, update_employee,\
                     delete_employee, update_customer, delete_customer, update_purchase,\
                         delete_purchase, register_admin, register_customer, \
-                            login_admin, login_customer, dashboard_customer, \
-                                orders_page, add_order_page, update_order_page, \
-                                    delete_order_page
+                            login_admin, login_customer, dashboard_customer
 
 app_name = 'store'
 
@@ -59,12 +57,6 @@ urlpatterns = [
     path('purchases/add-purchase/', add_purchase_page, name="add-purchase"),
     path('purchases/update-purchase/<int:pk>/', update_purchase, name="update-purchase"),
     path('purchases/delete-purchase/<int:pk>/', delete_purchase, name="delete-purchase"),
-
-    # Order CRUD
-    path('orders/', orders_page, name="view-orders"),
-    path('orders/add-order/', add_order_page, name="add-order"),
-    path('orders/update/<int:pk>/', update_order_page, name="update-order"),
-    path('orders/delete-order/<int:pk>/', delete_order_page, name="delete-order"),
 
     path('settings/', settings_page, name="settings")
 ]
