@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Dealer, Medicine, Employee, \
-    Customer, Purchase, AdminProfile
+    Customer, Purchase, Profile
 
 
 class DealerAdmin(admin.ModelAdmin):
@@ -38,7 +38,7 @@ class PurchaseAdmin(admin.ModelAdmin):
     ]
 
 
-class CustomProfileAdmin(admin.ModelAdmin):
+class ProfileAdmin(admin.ModelAdmin):
     list_display = [
         "id", "user", 
         "phone_number", "profile_picture"
@@ -48,7 +48,7 @@ class CustomProfileAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(AdminProfile, CustomProfileAdmin)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Dealer, DealerAdmin)
 admin.site.register(Medicine, MedicineAdmin)
 admin.site.register(Employee, EmployeeAdmin)
