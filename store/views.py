@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from store.models import (
     Dealer, Medicine, Employee,
-    Customer, Purchase, AdminProfile
+    Customer, Purchase, Profile
 )
 from customer.models import Order
 from django.contrib.auth.forms import UserCreationForm,\
@@ -46,9 +46,9 @@ def login_admin(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"{username}, you are logged in.")
-                return redirect("store:dashboard")
+                return redirect("store:dashboard-admin")
             messages.error(request, f"Oops, the username {username} does not exist in our database. Please try again.")
-        return redirect("store:login")
+        return redirect("store:login-admin")
 
     context = {
         'form': form
@@ -72,9 +72,9 @@ def login_customer(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"{username}, you are logged in.")
-                return redirect("store:dashboard")
+                return redirect("store:dashboard-customer")
             messages.error(request, f"Oops, the username {username} does not exist in our database. Please try again.")
-        return redirect("store:login")
+        return redirect("store:login-customer")
 
     context = {
         'form': form
@@ -96,7 +96,7 @@ def register_admin(request):
             messages.success(request, "Your account has successfully been created.")
             return redirect("store:login")
         print("Something's not right.")
-        return redirect("store:register")
+        return redirect("store:register-admin")
 
     context = {
         'form': form
@@ -113,14 +113,14 @@ def register_customer(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Your account has successfully been created.")
-            return redirect("store:login")
+            return redirect("store:login-customer")
         print("Something's not right.")
-        return redirect("store:register")
+        return redirect("store:register-customer")
 
     context = {
         'form': form
     }
-    return render(request, "store/register-admin.html")
+    return render(request, "store/register-customer.html", context)
 
 
 @login_required(login_url="/login/admin/")
@@ -131,77 +131,6 @@ def dashboard_admin(request):
 @login_required(login_url="/login/customer/")
 def dashboard_customer(request):
     return render(request, "store/dashboard-customer.html")
-
-
-"""
-Order CRUD Starts Here
-"""
-@login_required(login_url="/login/customer/")
-def orders_page(request):
-    orders = Order.objects.all()
-
-    context = {
-        "orders": orders
-    }
-    return render(request, "store/view-orders.html", context)
-
-
-@login_required(login_url="/login/customer/")
-def add_order_page(request):
-    form = AddOrderForm()
-
-    if request.method == "POST":
-        form = AddOrderForm(request.POST)
-        if form.is_valid():
-            customer = form.cleaned_data.get("customer")
-            med_name = form.cleaned_data.get("med_name")
-            price = form.cleaned_data.get("price")
-            quantity = form.cleaned_data.get("quantity")
-
-            order = Order(
-                customer=customer, med_name=med_name, 
-                price=price, quantity=quantity
-            )
-            order.save()
-            messages.success(request, "You have added a new order.")
-            return redirect("store:view-orders")
-        return redirect("store:add-order")
-    
-    context = {
-        "form": form
-    }
-    return render(request, "store/add-order.html", context)
-
-
-@login_required(login_url="/login/customer/")
-def update_order_page(request, pk):
-    order = Order.objects.get(id=pk)
-    form = AddOrderForm(instance=order)
-
-    if request.method == "POST":
-        form = AddOrderForm(request.POST, instance=order)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "You have updated that order.")
-            return redirect("store:view-orders")
-        return redirect("store:add-order")
-
-    context = {
-        "form": form
-    }
-    return render(request, "store/update-order.html", context)
-
-
-@login_required(login_url="/login/customer/")
-def delete_order_page(request, pk):
-    order = Order.objects.get(id=pk)
-    order.delete()
-    messages.success(request, "You have successfully deleted that order.")
-    return redirect("store:view-orders")
-
-"""
-Order CRUD Ends Here
-"""
 
 """
 Dealers CRUD Starts Here
