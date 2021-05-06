@@ -28,7 +28,7 @@ SECRET_KEY = '-=ne$7#7vl1l61s@=0c+8e&^*robji0x2g0vvdcn2(c9d4bit&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["medicalstore-django.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
