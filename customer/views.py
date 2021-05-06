@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from store.models import Medicine, Purchase
 from .models import Order
+from store.models import Purchase
 from django.contrib import messages
 from store.forms import AddMedicineForm, AddPurchaseForm,\
         UpdateMedicineForm, UpdateCustomerForm,\
@@ -155,7 +156,7 @@ Purchase CRUD Starts Here
 """
 @login_required(login_url="/login/customer/")
 def purchases_page(request):
-    purchases = Purchase.objects.all()
+    purchases = Purchase.objects.filter(customer=request.user)
 
     context = {
         "purchases": purchases
