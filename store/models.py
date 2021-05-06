@@ -78,7 +78,7 @@ class Customer(models.Model):
 
 class Purchase(models.Model):
     med_name = models.ForeignKey(Medicine, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     price_number = models.FloatField()
     quantity = models.IntegerField()
 
