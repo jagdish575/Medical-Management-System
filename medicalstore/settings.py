@@ -12,12 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import json
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-with open(os.path.join(BASE_DIR, 'config.json')) as config_file:
-    config = json.load(config_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -28,7 +24,7 @@ SECRET_KEY = '-=ne$7#7vl1l61s@=0c+8e&^*robji0x2g0vvdcn2(c9d4bit&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["medicalstore-django.herokuapp.com", "127.0.0.1"]
+ALLOWED_HOSTS = ['medicalstore.onrender.com',"*"]
 
 
 # Application definition
@@ -53,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'medicalstore.urls'
@@ -79,29 +76,20 @@ WSGI_APPLICATION = 'medicalstore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# if DEBUG is False:
+#     DATABASES = {
+#         'default': dj_database_url.config(
+#             default='mysql://jagdish:admin123@localhost:3306/medicalstore',
+#             conn_max_age=600
+#         )
+#     }
+
+
 if DEBUG is True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-elif DEBUG is False:
-    DATABASES = {
-
-        'default': {
-
-            'ENGINE': 'django.db.backends.postgresql',
-
-            'NAME': config["NAME"],
-
-            'USER': config["USER"],
-
-            'PASSWORD': config["PASSWORD"],
-
-            'HOST': config["HOST"],
-
-            'PORT': 5432,
         }
     }
 
@@ -151,6 +139,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "store/static"
 ]
 STATIC_ROOT = "staticfiles/"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = "media/"
 MEDIA_URL = "media/"
