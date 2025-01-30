@@ -230,6 +230,8 @@ def add_medicine_page(request):
     if request.method == "POST":
         form = AddMedicineForm(request.POST)
         if form.is_valid():
+            import pdb
+            pdb.set_trace()
             med_code = form.cleaned_data.get("med_code")
             med_name = form.cleaned_data.get("med_name")
             dealer_name = form.cleaned_data.get("dealer_name")
